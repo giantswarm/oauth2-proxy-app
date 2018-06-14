@@ -41,7 +41,8 @@ spec:
               name: oauth2-proxy-secret
               key: cookie-secret
         ports:
-        - containerPort: 4180
+        - name: oauth2-proxy
+          containerPort: 4180
           protocol: TCP
         resources:
           limits:
