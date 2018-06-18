@@ -44,6 +44,16 @@ spec:
         - name: oauth2-proxy
           containerPort: 4180
           protocol: TCP
+        livenessProbe:
+          tcpSocket:
+            port: 4180
+          initialDelaySeconds: 5
+          timeoutSeconds: 1
+        readinessProbe:
+          tcpSocket:
+            port: 4180
+          initialDelaySeconds: 5
+          timeoutSeconds: 1
         resources:
           limits:
             cpu: 100m
