@@ -20,7 +20,7 @@ spec:
         name: oauth2-proxy
         args:
         - --cookie-expire=0h30m0s
-        - --email-domain="giantswarm.io"
+        - --email-domain=giantswarm.io
         - --http-address=0.0.0.0:4180
         - --provider=google
         - --upstream=file:///dev/null
