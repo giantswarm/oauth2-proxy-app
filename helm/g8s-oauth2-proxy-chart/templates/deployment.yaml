@@ -16,7 +16,7 @@ spec:
         k8s-app: oauth2-proxy
     spec:
       containers:
-      - image: quay.io/giantswarm/oauth2_proxy:2.2
+      - image: quay.io/giantswarm/g8s-oauth2-proxy:[[ .SHA ]]
         name: oauth2-proxy
         args:
         - --cookie-expire=0h30m0s
