@@ -6,14 +6,18 @@ It is build upon the [bitly/oauth2_proxy](https://github.com/bitly/oauth2_proxy)
 
 ```bash
 --cookie-expire=0h30m0s
---email-domain="giantswarm.io"
---provider=google
+# Use Auth0 as identity provider
+--provider=oidc
+--oidc-issuer-url=https://giantswarm.eu.auth0.com/
+--login-url=https://giantswarm.eu.auth0.com/authorize
+--redeem-url=https://giantswarm.eu.auth0.com/oauth/token
+--validate-url=https://giantswarm.eu.auth0.com/userinfo
 ```
 
 More options can be found [here](https://github.com/bitly/oauth2_proxy#command-line-options).
 
 
-## Current supported Services at GS: 
+## Current supported Services at GS:
 - G8s-Prometheus
 - G8s-Alertmanager
 - G8s-Kibana
@@ -47,6 +51,7 @@ spec:
 
 If SSL is enabled, add the same certificate as the existing ingress, to the oauth2 ingress.
 
-3. Add the (callback-) urls for the new Service to the google Oauth2 Client
+3. Add the (callback-) urls for the new Service to the Auth0 `OAuth2-Proxy` Application
 
-The google client can be found here: https://console.developers.google.com/apis/credentials.
+Auth0 can be found here: https://manage.auth0.com/#/
+
