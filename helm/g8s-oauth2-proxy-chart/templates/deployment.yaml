@@ -21,9 +21,13 @@ spec:
         name: oauth2-proxy
         args:
         - --cookie-expire=0h30m0s
-        - --email-domain=giantswarm.io
+        - --email-domain=*
         - --http-address=0.0.0.0:4180
-        - --provider=google
+        - --provider=oidc
+        - --oidc-issuer-url=https://giantswarm.eu.auth0.com/
+        - --login-url=https://giantswarm.eu.auth0.com/authorize
+        - --redeem-url=https://giantswarm.eu.auth0.com/oauth/token
+        - --validate-url=https://giantswarm.eu.auth0.com/userinfo
         - --upstream=file:///dev/null
         env:
         - name: OAUTH2_PROXY_CLIENT_ID
