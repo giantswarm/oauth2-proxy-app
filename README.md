@@ -48,20 +48,14 @@ More options can be found [here](https://github.com/bitly/oauth2_proxy#command-l
             serviceName: oauth2-proxy
             servicePort: 4180
     ```
-
     If SSL is enabled, add the same certificate from the existing ingress, to the oauth2 ingress.
 
-3. Add to Service URL to the list of allowed Callback URLs in Auth0:
-
-    Auth0 can be found here: https://manage.auth0.com/#/.
-
+3. Add to Service URL to the list of allowed Callback URLs in [Auth0](https://manage.auth0.com/#/):
     Navigate to the Application `OAuth2-Proxy` and enter the service URL in the
     list of allowed Callback URLs with the following scheme:
-
-```
-https://{{ Your.Service.URL }}/oauth2/callback
-```
-
+    ```
+    https://{{ Your.Service.URL }}/oauth2/callback
+    ```
     This has to be done for every installation separately.
 
 
