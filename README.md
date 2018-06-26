@@ -51,6 +51,7 @@ More options can be found [here](https://github.com/bitly/oauth2_proxy#command-l
     If SSL is enabled, add the same certificate from the existing ingress, to the oauth2 ingress.
 
 3. Add to Service URL to the list of allowed Callback URLs in [Auth0](https://manage.auth0.com/#/):
+
     Navigate to the Application `OAuth2-Proxy` and enter the service URL in the
     list of allowed Callback URLs with the following scheme:
     ```
