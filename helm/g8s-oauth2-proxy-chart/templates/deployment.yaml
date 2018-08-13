@@ -20,7 +20,8 @@ spec:
       - image: gfkse/oauth2_proxy:kubernetes-3-ca-certs
         name: oauth2-proxy
         args:
-        - --cookie-expire=0h30m0s
+        - --cookie-expire=0h60m0s
+        - --cookie-refresh=0h1m0s
         - --email-domain=*
         - --http-address=0.0.0.0:4180
         - --provider=oidc
