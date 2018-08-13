@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
         # Use bitly fork from https://github.com/giantswarm/oauth2_proxy
-      - image: quay.io/joelspeed/kubernetes-3
+      - image: quay.io/joelspeed/oauth2_proxy:kubernetes-3
         name: oauth2-proxy
         args:
         - --cookie-expire=0h30m0s
