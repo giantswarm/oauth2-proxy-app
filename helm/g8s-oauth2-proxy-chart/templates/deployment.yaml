@@ -16,12 +16,13 @@ spec:
         k8s-app: oauth2-proxy
     spec:
       containers:
-        # Use bitly fork from https://github.com/giantswarm/oauth2_proxy
+        # Use bitly fork from https://github.com/pusher/oauth2_proxy/tree/kubernetes,
+        # which supports OICD token renewal and has ca certs installed
       - image: gfkse/oauth2_proxy:kubernetes-3-ca-certs
         name: oauth2-proxy
         args:
-        - --cookie-expire=0h60m0s
-        - --cookie-refresh=0h2m0s
+        - --cookie-expire=0h5m0s
+        - --cookie-refresh=0h3m0s
         - --email-domain=*
         - --http-address=0.0.0.0:4180
         - --provider=oidc
