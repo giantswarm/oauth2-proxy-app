@@ -16,8 +16,9 @@ spec:
         k8s-app: oauth2-proxy
     spec:
       containers:
-        # Use bitly fork from https://github.com/pusher/oauth2_proxy/tree/kubernetes,
-        # which supports OIDC token renewal and has ca certs installed
+        # Use retagged image from https://github.com/gfkse/oauth2_proxy/tree/kubernetes,
+        # a fork from the discontinued bitly/oauth2_proxy, which supports OIDC token renewal.
+        # See also: https://github.com/bitly/oauth2_proxy/pull/621.
       - image: {{ .Values.Installation.V1.Registry.Domain }}/giantswarm/oauth2_proxy:kubernetes-3-ca-certs
         name: oauth2-proxy
         args:
