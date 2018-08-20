@@ -5,7 +5,8 @@ Reverse OAuth2 Proxy that handles authentication for GS web frontends.
 It is build upon the [bitly/oauth2_proxy](https://github.com/bitly/oauth2_proxy), with the configuration:
 
 ```bash
---cookie-expire=0h30m0s
+--cookie-expire=24h0m0s
+--cookie-refresh=0h60m0s
 --provider=oidc
 # Use Auth0 as identity provider
 --oidc-issuer-url=https://giantswarm.eu.auth0.com/
