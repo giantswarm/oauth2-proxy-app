@@ -4,7 +4,7 @@ metadata:
   labels:
     k8s-app: oauth2-proxy
   name: oauth2-proxy
-  namespace: kube-system
+  namespace: {{ .Values.namespace }}
 spec:
   ports:
   - name: http
