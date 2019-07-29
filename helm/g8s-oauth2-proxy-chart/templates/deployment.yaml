@@ -2,25 +2,29 @@ apiVersion: extensions/v1beta1
 kind: Deployment
 metadata:
   labels:
-    k8s-app: oauth2-proxy
-  name: oauth2-proxy
+    k8s-app: {{ .Values.name }}
+  name: {{ .Values.name }}
   namespace: {{ .Values.namespace }}
 spec:
   replicas: 2
   selector:
     matchLabels:
-      k8s-app: oauth2-proxy
+      k8s-app: {{ .Values.name }}
   template:
     metadata:
       labels:
-        k8s-app: oauth2-proxy
+        k8s-app: {{ .Values.name }}
     spec:
+      serviceAccountName: {{ .Values.name }}
+      securityContext:
+        runAsUser: {{ .Values.userID }}
+        runAsGroup: {{ .Values.groupID }}
       containers:
         # Use retagged image from https://github.com/gfkse/oauth2_proxy/tree/kubernetes,
         # a fork from the discontinued bitly/oauth2_proxy, which supports OIDC token renewal.
         # See also: https://github.com/bitly/oauth2_proxy/pull/621.
       - image: {{ .Values.Installation.V1.Registry.Domain }}/giantswarm/oauth2_proxy:kubernetes-3-ca-certs
-        name: oauth2-proxy
+        name: {{ .Values.name }}
         args:
         - --cookie-expire=24h0m0s
         - --cookie-refresh=0h60m0s
@@ -51,7 +55,7 @@ spec:
               name: oauth2-proxy-secret
               key: cookie-secret
         ports:
-        - name: oauth2-proxy
+        - name: {{ .Values.name }}
           containerPort: 4180
           protocol: TCP
         livenessProbe:
