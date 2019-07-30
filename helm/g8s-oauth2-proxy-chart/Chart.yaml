@@ -1,2 +1,2 @@
 name: g8s-oauth2-proxy-chart
-version: 1.1.0-[[ .SHA ]]
+version: 1.0.0-[[ .SHA ]]
