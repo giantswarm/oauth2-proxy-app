@@ -40,7 +40,6 @@ workflows:
           context: architect
           name: push-g8s-oauth2-proxy-to-aws-app-collection
           app_name: "g8s-oauth2-proxy"
-          app_namespace: "monitoring"
           app_collection_repo: "aws-app-collection"
           unique: "true"
           requires:
@@ -55,7 +54,6 @@ workflows:
           context: architect
           name: push-g8s-oauth2-proxy-to-azure-app-collection
           app_name: "g8s-oauth2-proxy"
-          app_namespace: "monitoring"
           app_collection_repo: "azure-app-collection"
           unique: "true"
           requires:
@@ -70,7 +68,6 @@ workflows:
           context: architect
           name: push-g8s-oauth2-proxy-to-kvm-app-collection
           app_name: "g8s-oauth2-proxy"
-          app_namespace: "monitoring"
           app_collection_repo: "kvm-app-collection"
           unique: "true"
           requires:
