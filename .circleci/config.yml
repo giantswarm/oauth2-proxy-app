@@ -1,4 +1,8 @@
-version: 2
+version: 2.1
+
+orbs:
+  architect: giantswarm/architect@0.8.12
+
 jobs:
   build:
     machine: true
@@ -6,15 +10,73 @@ jobs:
     - checkout
 
     - run: |
-        wget -q $(curl -sS -H "Authorization: token $RELEASE_TOKEN" https://api.github.com/repos/giantswarm/architect/releases/tags/v1.0.0 | grep browser_download_url | head -n 1 | cut -d '"' -f 4)
+        wget -q $(curl -sS -H "Authorization: token $RELEASE_TOKEN" https://api.github.com/repos/giantswarm/architect/releases/latest | grep browser_download_url | head -n 1 | cut -d '"' -f 4)
         chmod +x ./architect
         ./architect version
     - run: ./architect build
-    - run:
-        name: Publish chart to CNR using a temporary channel for feature branch deploys
-        command: ./architect publish --pipeline=false --channels=wip-${CIRCLE_SHA1}
-    - deploy:
-        command: |
-          if [ "${CIRCLE_BRANCH}" == "master" ]; then
-            ./architect deploy
-          fi
+
+workflows:
+  version: 2
+  build:
+    jobs:
+      - build:
+          filters:
+            tags:
+              only: /^v.*/
+
+      - architect/push-to-app-catalog:
+          context: architect
+          name: push-g8s-oauth-proxy-to-control-plane-app-catalog
+          app_catalog: "control-plane-catalog"
+          app_catalog_test: "control-plane-test-catalog"
+          chart: "g8s-oauth-proxy"
+          requires:
+          - build
+          filters:
+            tags:
+              only: /^v.*/
+
+      - architect/push-to-app-collection:
+          context: architect
+          name: push-g8s-oauth-proxy-to-aws-app-collection
+          app_name: "g8s-oauth-proxy"
+          app_namespace: "monitoring"
+          app_collection_repo: "aws-app-collection"
+          unique: "true"
+          requires:
+            - push-g8s-oauth-proxy-to-control-plane-app-catalog
+          filters:
+            branches:
+              ignore: /.*/
+            tags:
+              only: /^v.*/
+
+      - architect/push-to-app-collection:
+          context: architect
+          name: push-g8s-oauth-proxy-to-azure-app-collection
+          app_name: "g8s-oauth-proxy"
+          app_namespace: "monitoring"
+          app_collection_repo: "azure-app-collection"
+          unique: "true"
+          requires:
+            - push-g8s-oauth-proxy-to-control-plane-app-catalog
+          filters:
+            branches:
+              ignore: /.*/
+            tags:
+              only: /^v.*/
+
+      - architect/push-to-app-collection:
+          context: architect
+          name: push-g8s-oauth-proxy-to-kvm-app-collection
+          app_name: "g8s-oauth-proxy"
+          app_namespace: "monitoring"
+          app_collection_repo: "kvm-app-collection"
+          unique: "true"
+          requires:
+            - push-g8s-oauth-proxy-to-control-plane-app-catalog
+          filters:
+            branches:
+              ignore: /.*/
+            tags:
+              only: /^v.*/
