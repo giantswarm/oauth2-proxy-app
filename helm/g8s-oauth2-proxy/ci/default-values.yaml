@@ -1,0 +1,9 @@
+Installation:
+  V1:
+    Registry:
+      Domain: host
+    Secret:
+      OAuth2Proxy:
+        ClientID: test
+        ClientSecret: test
+        CookieSecret: test
