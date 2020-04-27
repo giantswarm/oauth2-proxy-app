@@ -26,10 +26,10 @@ workflows:
 
       - architect/push-to-app-catalog:
           context: architect
-          name: push-g8s-oauth-proxy-to-control-plane-app-catalog
+          name: push-g8s-oauth2-proxy-to-control-plane-app-catalog
           app_catalog: "control-plane-catalog"
           app_catalog_test: "control-plane-test-catalog"
-          chart: "g8s-oauth-proxy"
+          chart: "g8s-oauth2-proxy"
           requires:
           - build
           filters:
@@ -38,13 +38,13 @@ workflows:
 
       - architect/push-to-app-collection:
           context: architect
-          name: push-g8s-oauth-proxy-to-aws-app-collection
-          app_name: "g8s-oauth-proxy"
+          name: push-g8s-oauth2-proxy-to-aws-app-collection
+          app_name: "g8s-oauth2-proxy"
           app_namespace: "monitoring"
           app_collection_repo: "aws-app-collection"
           unique: "true"
           requires:
-            - push-g8s-oauth-proxy-to-control-plane-app-catalog
+            - push-g8s-oauth2-proxy-to-control-plane-app-catalog
           filters:
             branches:
               ignore: /.*/
@@ -53,13 +53,13 @@ workflows:
 
       - architect/push-to-app-collection:
           context: architect
-          name: push-g8s-oauth-proxy-to-azure-app-collection
-          app_name: "g8s-oauth-proxy"
+          name: push-g8s-oauth2-proxy-to-azure-app-collection
+          app_name: "g8s-oauth2-proxy"
           app_namespace: "monitoring"
           app_collection_repo: "azure-app-collection"
           unique: "true"
           requires:
-            - push-g8s-oauth-proxy-to-control-plane-app-catalog
+            - push-g8s-oauth2-proxy-to-control-plane-app-catalog
           filters:
             branches:
               ignore: /.*/
@@ -68,13 +68,13 @@ workflows:
 
       - architect/push-to-app-collection:
           context: architect
-          name: push-g8s-oauth-proxy-to-kvm-app-collection
-          app_name: "g8s-oauth-proxy"
+          name: push-g8s-oauth2-proxy-to-kvm-app-collection
+          app_name: "g8s-oauth2-proxy"
           app_namespace: "monitoring"
           app_collection_repo: "kvm-app-collection"
           unique: "true"
           requires:
-            - push-g8s-oauth-proxy-to-control-plane-app-catalog
+            - push-g8s-oauth2-proxy-to-control-plane-app-catalog
           filters:
             branches:
               ignore: /.*/
