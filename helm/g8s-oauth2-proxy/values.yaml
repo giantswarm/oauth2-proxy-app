@@ -1,5 +1,4 @@
 name: oauth2-proxy
-namespace: monitoring
 
 port:
   port: 4180
