@@ -3,35 +3,16 @@ version: 2.1
 orbs:
   architect: giantswarm/architect@2.2.0
 
-jobs:
-  build:
-    machine: true
-    steps:
-    - checkout
-
-    - run: |
-        wget -q $(curl -sS -H "Authorization: token $RELEASE_TOKEN" https://api.github.com/repos/giantswarm/architect/releases/latest | grep browser_download_url | head -n 1 | cut -d '"' -f 4)
-        chmod +x ./architect
-        ./architect version
-    - run: ./architect build
-
 workflows:
   version: 2
   build:
     jobs:
-      - build:
-          filters:
-            tags:
-              only: /^v.*/
-
       - architect/push-to-app-catalog:
           context: architect
           name: push-g8s-oauth2-proxy-to-control-plane-app-catalog
           app_catalog: "control-plane-catalog"
           app_catalog_test: "control-plane-test-catalog"
           chart: "g8s-oauth2-proxy"
-          requires:
-          - build
           filters:
             tags:
               only: /^v.*/
