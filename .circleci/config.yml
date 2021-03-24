@@ -1,7 +1,7 @@
 version: 2.1
 
 orbs:
-  architect: giantswarm/architect@2.2.0
+  architect: giantswarm/architect@2.4.1
 
 workflows:
   version: 2
@@ -14,6 +14,20 @@ workflows:
           app_catalog_test: "control-plane-test-catalog"
           chart: "g8s-oauth2-proxy"
           filters:
+            tags:
+              only: /^v.*/
+
+      - architect/push-to-app-collection:
+          context: architect
+          name: push-g8s-oauth2-proxy-to-shared-app-collection
+          app_name: "g8s-oauth2-proxy"
+          app_namespace: "monitoring"
+          app_collection_repo: "shared-app-collection"
+          requires:
+            - push-g8s-oauth2-proxy-to-control-plane-app-catalog
+          filters:
+            branches:
+              ignore: /.*/
             tags:
               only: /^v.*/
 
