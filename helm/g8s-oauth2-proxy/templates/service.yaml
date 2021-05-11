@@ -12,4 +12,4 @@ spec:
     protocol: TCP
     targetPort: 4180
   selector:
-    k8s-app: oauth2-proxy
+    k8s-app: {{ .Values.name }}
