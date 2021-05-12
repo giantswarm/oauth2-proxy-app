@@ -22,6 +22,7 @@ More options can be found [here](https://github.com/bitly/oauth2_proxy#command-l
 - G8s-Prometheus
 - G8s-Alertmanager
 - G8s-Kibana
+- G8s-Alertmanager-Dashboard
 
 ## Add authentication/authorization to a web frontend
 

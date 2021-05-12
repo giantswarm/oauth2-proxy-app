@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed
+
+- Use name from values as endpoint selector in service.
+
 ## [1.1.1] - 2020-04-27
 
 ### Changed
