@@ -6,3 +6,11 @@ port:
 
 userID: 1000
 groupID: 1000
+
+registry:
+  domain: docker.io
+
+oauth2Proxy:
+  clientID: ""
+  clientSecret: ""
+  cookieSecret: ""

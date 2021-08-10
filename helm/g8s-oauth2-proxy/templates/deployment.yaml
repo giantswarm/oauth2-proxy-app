@@ -23,7 +23,7 @@ spec:
         # Use retagged image from https://github.com/gfkse/oauth2_proxy/tree/kubernetes,
         # a fork from the discontinued bitly/oauth2_proxy, which supports OIDC token renewal.
         # See also: https://github.com/bitly/oauth2_proxy/pull/621.
-      - image: {{ .Values.Installation.V1.Registry.Domain }}/giantswarm/oauth2_proxy:kubernetes-3-ca-certs
+      - image: {{ .Values.registry.domain }}/giantswarm/oauth2_proxy:kubernetes-3-ca-certs
         name: {{ .Values.name }}
         args:
         - --cookie-expire=24h0m0s
