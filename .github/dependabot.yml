@@ -1,17 +1,9 @@
 # DO NOT EDIT. Generated with:
 #
-#    devctl@4.7.0
+#    devctl@4.10.0
 #
 version: 2
 updates:
-  - package-ecosystem: docker
-    directory: "/"
-    schedule:
-      interval: weekly
-      time: "04:00"
-    open-pull-requests-limit: 10
-    reviewers:
-      - giantswarm/team-rocket
   - package-ecosystem: github-actions
     directory: "/"
     schedule:
@@ -19,18 +11,14 @@ updates:
       time: "04:00"
     open-pull-requests-limit: 10
     reviewers:
-      - giantswarm/team-rocket
+      - giantswarm/team-halo-engineers
     ignore:
       - dependency-name: zricethezav/gitleaks-action
-  - package-ecosystem: gomod
+  - package-ecosystem: pip
     directory: "/"
     schedule:
       interval: weekly
       time: "04:00"
     open-pull-requests-limit: 10
     reviewers:
-      - giantswarm/team-rocket
-    ignore:
-      - dependency-name: k8s.io/*
-        versions:
-          - ">=0.19.0"
+      - giantswarm/team-halo-engineers
