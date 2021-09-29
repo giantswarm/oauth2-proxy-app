@@ -2,7 +2,7 @@
 
 Reverse OAuth2 Proxy that handles authentication for GS web frontends.
 
-It is build upon the [bitly/oauth2_proxy](https://github.com/bitly/oauth2_proxy), with the configuration:
+It is build upon the [oauth2_proxy/oauth2_proxy](https://github.com/oauth2_proxy/oauth2_proxy), with the configuration:
 
 ```bash
 --cookie-expire=24h0m0s

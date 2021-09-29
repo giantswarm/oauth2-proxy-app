@@ -1,7 +1,10 @@
 apiVersion: policy/v1beta1
 kind: PodSecurityPolicy
 metadata:
-  name: {{ .Values.name }}-psp
+  name: {{ include "resource.default.name" . }}-psp
+  namespace: {{ .Release.Namespace }}
+  labels:
+    {{- include "labels.common" . | nindent 4 }}
 spec:
   privileged: false
   fsGroup:

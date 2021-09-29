@@ -1,6 +1,5 @@
-name: oauth2-proxy
-
 port:
+  name: oauth2-proxy
   port: 4180
   protocol: TCP
 
@@ -10,7 +9,24 @@ groupID: 1000
 registry:
   domain: docker.io
 
+ingress:
+  enabled: false
+
 oauth2Proxy:
-  clientID: ""
-  clientSecret: ""
-  cookieSecret: ""
+  cookie:
+    expiry: 24h0m0s
+    refresh: 0h60m0s
+  emailDomain: "*"
+  setAuthorizationHeader: true
+  skipProviderButton: true
+  oidc:
+    issuerURL: ""
+    loginURL: ""
+    redeemURL: ""
+    validateURL: ""
+  providers:
+  - id: "default"
+    provider: "oidc"
+    clientID: ""
+    clientSecret: ""
+    cookieSecret: ""
