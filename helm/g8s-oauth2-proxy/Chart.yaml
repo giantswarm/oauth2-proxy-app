@@ -1,8 +1,0 @@
-apiVersion: "v1"
-name: "g8s-oauth2-proxy"
-description: "Helm chart for g8s-oauth2-proxy."
-home: "https://github.com/giantswarm/g8s-oauth2-proxy"
-version: "[[ .Version ]]"
-appVersion: "[[ .AppVersion ]]"
-annotations:
-  config.giantswarm.io/version: 1.x.x

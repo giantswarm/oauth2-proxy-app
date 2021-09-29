@@ -1,4 +1,4 @@
-# g8s-oauth2-proxy
+# oauth2-proxy-app
 
 Reverse OAuth2 Proxy that handles authentication for GS web frontends.
 
@@ -18,10 +18,9 @@ It is build upon the [bitly/oauth2_proxy](https://github.com/bitly/oauth2_proxy)
 More options can be found [here](https://github.com/bitly/oauth2_proxy#command-line-options).
 
 
-## Current supported Services at GS:
-- G8s-Prometheus
+## Current supported Services at Giant Swarm:
+- Prometheus operator managed Prometheus and Alertmanager
 - G8s-Alertmanager
-- G8s-Kibana
 - G8s-Alertmanager-Dashboard
 
 ## Add authentication/authorization to a web frontend
