@@ -13,7 +13,7 @@ workflows:
           name: push-to-default-app-catalog
           app_catalog: "default-catalog"
           app_catalog_test: "default-test-catalog"
-          chart: "oauth2-proxy-app"
+          chart: "oauth2-proxy"
           filters:
             # Trigger the job also on git tag.
             tags:
@@ -25,7 +25,7 @@ workflows:
           name: push-to-giantswarm-app-catalog
           app_catalog: "giantswarm-catalog"
           app_catalog_test: "giantswarm-test-catalog"
-          chart: "oauth2-proxy-app"
+          chart: "oauth2-proxy"
           filters:
             # Trigger the job also on git tag.
             tags:
@@ -37,7 +37,7 @@ workflows:
           name: push-to-control-plane-app-catalog
           app_catalog: "control-plane-catalog"
           app_catalog_test: "control-plane-test-catalog"
-          chart: "oauth2-proxy-app"
+          chart: "oauth2-proxy"
           filters:
             # Trigger the job also on git tag.
             tags:
@@ -45,8 +45,8 @@ workflows:
 
       - architect/push-to-app-collection:
           context: architect
-          name: push-oauth2-proxy-app-to-shared-app-collection
-          app_name: "oauth2-proxy-app"
+          name: push-oauth2-proxy-to-shared-app-collection
+          app_name: "oauth2-proxy"
           app_namespace: "monitoring"
           app_collection_repo: "shared-app-collection"
           requires:
@@ -59,8 +59,8 @@ workflows:
 
       - architect/push-to-app-collection:
           context: architect
-          name: push-oauth2-proxy-app-to-aws-app-collection
-          app_name: "oauth2-proxy-app"
+          name: push-oauth2-proxy-to-aws-app-collection
+          app_name: "oauth2-proxy"
           app_namespace: "monitoring"
           app_collection_repo: "aws-app-collection"
           requires:
@@ -73,8 +73,8 @@ workflows:
 
       - architect/push-to-app-collection:
           context: architect
-          name: push-oauth2-proxy-app-to-azure-app-collection
-          app_name: "oauth2-proxy-app"
+          name: push-oauth2-proxy-to-azure-app-collection
+          app_name: "oauth2-proxy"
           app_namespace: "monitoring"
           app_collection_repo: "azure-app-collection"
           requires:
@@ -87,8 +87,8 @@ workflows:
 
       - architect/push-to-app-collection:
           context: architect
-          name: push-oauth2-proxy-app-to-kvm-app-collection
-          app_name: "oauth2-proxy-app"
+          name: push-oauth2-proxy-to-kvm-app-collection
+          app_name: "oauth2-proxy"
           app_namespace: "monitoring"
           app_collection_repo: "kvm-app-collection"
           requires:
@@ -101,8 +101,8 @@ workflows:
               
       - architect/push-to-app-collection:
           context: architect
-          name: push-oauth2-proxy-app-to-vmware-app-collection
-          app_name: "oauth2-proxy-app"
+          name: push-oauth2-proxy-to-vmware-app-collection
+          app_name: "oauth2-proxy"
           app_namespace: "monitoring"
           app_collection_repo: "vmware-app-collection"
           requires:
