@@ -1,4 +1,5 @@
 {{- range $provider := $.Values.oauth2Proxy.providers }}
+---
 apiVersion: v1
 kind: Service
 metadata:
