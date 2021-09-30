@@ -54,6 +54,9 @@ spec:
         {{- if $.Values.oauth2Proxy.oidc.redeemURL }}
         - --redeem-url={{ $.Values.oauth2Proxy.oidc.redeemURL }}
         {{- end }}
+        {{- if $.Values.oauth2Proxy.oidc.profileURL }}
+        - --profile-url={{ $.Values.oauth2Proxy.oidc.profileURL }}
+        {{- end }}
         {{- if $.Values.oauth2Proxy.oidc.validateURL }}
         - --validate-url={{ $.Values.oauth2Proxy.oidc.validateURL }}
         {{- end }}
