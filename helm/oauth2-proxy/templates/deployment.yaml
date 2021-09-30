@@ -60,6 +60,11 @@ spec:
         {{- if $.Values.oauth2Proxy.oidc.validateURL }}
         - --validate-url={{ $.Values.oauth2Proxy.oidc.validateURL }}
         {{- end }}
+        {{- if $provider.cookieSecret }}
+        - --cookie-secure=true
+        {{- else }}
+        - --cookie-secure=false
+        {{- end }}
         - --upstream=file:///dev/null
         env:
         - name: OAUTH2_PROXY_CLIENT_ID
