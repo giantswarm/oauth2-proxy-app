@@ -1,10 +1,18 @@
+{{- range $provider := $.Values.oauth2Proxy.providers }}
 apiVersion: v1
 kind: Service
 metadata:
+{{- if eq 1 (len $.Values.oauth2Proxy.providers) }}
+  name: {{ include "resource.default.name"  $ }}
+{{- else }}
+  name: {{ include "resource.default.name"  $ }}-{{ $provider.id }}
+{{- end }}
+  namespace: {{ $.Release.Namespace }}
   labels:
-    k8s-app: oauth2-proxy
-  name: oauth2-proxy
-  namespace: {{ .Release.Namespace }}
+    {{- include "labels.common" $ | nindent 4 }}
+    {{- if gt (len $.Values.oauth2Proxy.providers) 1}}
+    oauth2-proxy.provider: {{ $provider.id }}
+    {{- end}}
 spec:
   ports:
   - name: http
@@ -12,4 +20,8 @@ spec:
     protocol: TCP
     targetPort: 4180
   selector:
-    k8s-app: {{ .Values.name }}
+    {{- include "labels.selector" $ | nindent 4 }}
+    {{- if gt (len $.Values.oauth2Proxy.providers) 1}}
+    oauth2-proxy.provider: {{ $provider.id }}
+    {{- end}}
+{{- end }}
