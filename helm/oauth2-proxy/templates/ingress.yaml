@@ -41,6 +41,7 @@ spec:
         {{- else }}
         path: /{{ $provider.id }}/oauth2
         {{- end}}
+        pathType: ImplementationSpecific
       {{- end }}
   tls:
   - hosts:
