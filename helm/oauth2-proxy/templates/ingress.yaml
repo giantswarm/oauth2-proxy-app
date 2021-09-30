@@ -1,9 +1,9 @@
 {{- if .Values.ingress.enabled }}
-{{ if .Capabilities.APIVersions.Has "networking.k8s.io/v1/Ingress" }}
+{{- if $.Capabilities.APIVersions.Has "networking.k8s.io/v1/Ingress" }}
 apiVersion: networking.k8s.io/v1
-{{ else }}
+{{- else }}
 apiVersion: networking.k8s.io/v1beta1
-{{ end }}
+{{- end }}
 kind: Ingress
 metadata:
   annotations:
@@ -19,7 +19,7 @@ spec:
       paths:
       {{- range $provider := $.Values.oauth2Proxy.providers }}
       - backend:
-          {{ if .Capabilities.APIVersions.Has "networking.k8s.io/v1/Ingress" }}
+          {{- if $.Capabilities.APIVersions.Has "networking.k8s.io/v1/Ingress" }}
           service:
             {{- if eq (len $.Values.oauth2Proxy.providers) 1}}
             name: {{ include "resource.default.name"  $ }}
@@ -28,14 +28,14 @@ spec:
             {{- end}}
             port:
               number: {{ $.Values.port.port }}
-          {{ else }}
+          {{- else }}
           {{- if eq (len $.Values.oauth2Proxy.providers) 1}}
           serviceName: {{ include "resource.default.name"  $ }}
           {{- else }}
           serviceName: {{ $provider.id }}-{{ include "resource.default.name"  $ }}
           {{- end}}
           servicePort: {{ $.Values.port.port }}
-          {{ end }}
+          {{- end }}
         {{- if eq (len $.Values.oauth2Proxy.providers) 1}}
         path: /oauth2
         {{- else }}
