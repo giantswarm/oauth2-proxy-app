@@ -45,7 +45,9 @@ spec:
         - --provider={{ $provider.provider | default $.Values.oauth2Proxy.defaultProvider }}
         - --set-authorization-header={{ $.Values.oauth2Proxy.setAuthorizationHeader }}
         - --skip-provider-button={{ $.Values.oauth2Proxy.skipProviderButton }}
+        {{- if $.Values.oauth2Proxy.oidc.issuerURL }}
         - --oidc-issuer-url={{ $.Values.oauth2Proxy.oidc.issuerURL }}
+        {{- end }}
         {{- if $.Values.oauth2Proxy.oidc.loginURL }}
         - --login-url={{ $.Values.oauth2Proxy.oidc.loginURL }}
         {{- end }}
