@@ -12,7 +12,7 @@ spec:
   ingress:
   - ports:
     - port: {{ .Values.port.port }}
-      protocol: {{ .Values.port.protocol }}
+      protocol: TCP
   egress:
   - {}  
   policyTypes:

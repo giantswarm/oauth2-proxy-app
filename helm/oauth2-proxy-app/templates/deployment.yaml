@@ -3,7 +3,11 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ include "resource.default.name" $ }}
+{{- if eq 1 (len $.Values.oauth2Proxy.providers) }}
+  name: {{ include "resource.default.name"  $ }}
+{{- else }}
+  name: {{ $provider.id }}-{{ include "resource.default.name"  $ }}
+{{- end }}
   namespace: {{ $.Release.Namespace }}
   labels:
     {{- include "labels.common" $ | nindent 4 }}
@@ -38,7 +42,7 @@ spec:
         - --cookie-refresh={{ $.Values.oauth2Proxy.cookie.refresh }}
         - --email-domain={{ $.Values.oauth2Proxy.emailDomain }}
         - --http-address=0.0.0.0:4180
-        - --provider={{ $provider.provider }}
+        - --provider={{ $provider.provider | default $.Values.oauth2Proxy.defaultProvider }}
         - --set-authorization-header={{ $.Values.oauth2Proxy.setAuthorizationHeader }}
         - --skip-provider-button={{ $.Values.oauth2Proxy.skipProviderButton }}
         - --oidc-issuer-url={{ $.Values.oauth2Proxy.oidc.issuerURL }}

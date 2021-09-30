@@ -1,0 +1,49 @@
+{{- if .Values.ingress.enabled }}
+{{ if .Capabilities.APIVersions.Has "networking.k8s.io/v1/Ingress" }}
+apiVersion: networking.k8s.io/v1
+{{ else }}
+apiVersion: networking.k8s.io/v1beta1
+{{ end }}
+kind: Ingress
+metadata:
+  annotations:
+    kubernetes.io/tls-acme: {{ .Values.ingress.letsencrypt.enabled }}
+  labels:
+    {{- include "labels.common" . | nindent 4 }}
+  name: {{ include "resource.default.name" . }}
+  namespace: {{ $.Release.Namespace }}
+spec:
+  rules:
+  - host: {{ $.Values.ingress.host }}
+    http:
+      paths:
+      {{- range $provider := $.Values.oauth2Proxy.providers }}
+      - backend:
+          {{ if .Capabilities.APIVersions.Has "networking.k8s.io/v1/Ingress" }}
+          service:
+            {{- if eq (len $.Values.oauth2Proxy.providers) 1}}
+            name: {{ include "resource.default.name"  $ }}
+            {{- else }}
+            name: {{ $provider.id }}-{{ include "resource.default.name"  $ }}
+            {{- end}}
+            port:
+              number: {{ $.Values.port.port }}
+          {{ else }}
+          {{- if eq (len $.Values.oauth2Proxy.providers) 1}}
+          serviceName: {{ include "resource.default.name"  $ }}
+          {{- else }}
+          serviceName: {{ $provider.id }}-{{ include "resource.default.name"  $ }}
+          {{- end}}
+          servicePort: {{ $.Values.port.port }}
+          {{ end }}
+        {{- if eq (len $.Values.oauth2Proxy.providers) 1}}
+        path: /oauth2
+        {{- else }}
+        path: /{{ $provider.id }}/oauth2
+        {{- end}}
+      {{- end }}
+  tls:
+  - hosts:
+    - {{ $.Values.ingress.host }}
+    secretName: {{ $.Values.ingress.certSecretName }}
+{{- end }}

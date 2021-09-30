@@ -1,7 +1,6 @@
 port:
   name: oauth2-proxy
   port: 4180
-  protocol: TCP
 
 userID: 1000
 groupID: 1000
@@ -11,8 +10,13 @@ registry:
 
 ingress:
   enabled: false
+  letsencrypt:
+    enabled: true
+  host: ""
+  certSecretName: "oauth2-proxy"
 
 oauth2Proxy:
+  defaultProvider: oidc
   cookie:
     expiry: 24h0m0s
     refresh: 0h60m0s
