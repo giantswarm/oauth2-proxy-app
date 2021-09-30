@@ -41,8 +41,8 @@ spec:
         - --cookie-expire={{ $.Values.oauth2Proxy.cookie.expiry }}
         - --cookie-refresh={{ $.Values.oauth2Proxy.cookie.refresh }}
         - --email-domain={{ $.Values.oauth2Proxy.emailDomain }}
-        - --http-address=0.0.0.0:{{ $.Values.port.port }}
-        - --provider={{ $provider.provider }}
+        - --http-address=0.0.0.0:4180
+        - --provider={{ $provider.provider | default $.Values.oauth2Proxy.defaultProvider }}
         - --set-authorization-header={{ $.Values.oauth2Proxy.setAuthorizationHeader }}
         - --skip-provider-button={{ $.Values.oauth2Proxy.skipProviderButton }}
         - --oidc-issuer-url={{ $.Values.oauth2Proxy.oidc.issuerURL }}
@@ -88,16 +88,16 @@ spec:
         {{- end }}
         ports:
         - name: {{ $.Values.port.name }}
-          containerPort: {{ $.Values.port.port }}
-          protocol: {{ $.Values.port.protocol }}
+          containerPort: 4180
+          protocol: TCP
         livenessProbe:
           tcpSocket:
-            port: {{ $.Values.port.port }}
+            port: 4180
           initialDelaySeconds: 5
           timeoutSeconds: 1
         readinessProbe:
           tcpSocket:
-            port: {{ $.Values.port.port }}
+            port: 4180
           initialDelaySeconds: 5
           timeoutSeconds: 1
         resources:

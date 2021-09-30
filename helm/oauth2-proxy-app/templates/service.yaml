@@ -16,9 +16,9 @@ metadata:
 spec:
   ports:
   - name: http
-    port:  {{ $.Values.port.port }}
-    protocol:  {{ $.Values.port.protocol }}
-    targetPort:  {{ $.Values.port.port }}
+    port: 4180
+    protocol: TCP
+    targetPort: {{ $.Values.port.port }}
   selector:
     {{- include "labels.selector" $ | nindent 4 }}
     {{- if gt (len $.Values.oauth2Proxy.providers) 1}}
