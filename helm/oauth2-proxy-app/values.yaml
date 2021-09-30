@@ -11,6 +11,10 @@ registry:
 
 ingress:
   enabled: false
+  letsencrypt:
+    enabled: true
+  host: ""
+  certSecretName: "oauth2-proxy"
 
 oauth2Proxy:
   cookie:

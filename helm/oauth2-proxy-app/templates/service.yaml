@@ -5,7 +5,7 @@ metadata:
 {{- if eq 1 (len $.Values.oauth2Proxy.providers) }}
   name: {{ include "resource.default.name"  $ }}
 {{- else }}
-  name: {{ include "resource.default.name"  $ }}-{{ $provider.id }}
+  name: {{ $provider.id }}-{{ include "resource.default.name"  $ }}
 {{- end }}
   namespace: {{ $.Release.Namespace }}
   labels:
@@ -16,9 +16,9 @@ metadata:
 spec:
   ports:
   - name: http
-    port: 4180
-    protocol: TCP
-    targetPort: 4180
+    port:  {{ $.Values.port.port }}
+    protocol:  {{ $.Values.port.protocol }}
+    targetPort:  {{ $.Values.port.port }}
   selector:
     {{- include "labels.selector" $ | nindent 4 }}
     {{- if gt (len $.Values.oauth2Proxy.providers) 1}}

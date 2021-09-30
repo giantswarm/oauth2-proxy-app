@@ -10,6 +10,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 
 - Add multiple provider support.
+- Add ingress for the app.
 
 ### Changed
 

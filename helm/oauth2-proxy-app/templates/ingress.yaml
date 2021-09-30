@@ -1,0 +1,34 @@
+{{- if .Values.ingress.enabled }}
+apiVersion: networking.k8s.io/v1beta1
+kind: Ingress
+metadata:
+  annotations:
+    kubernetes.io/tls-acme: {{ .Values.ingress.letsencrypt.enabled }}
+  labels:
+    {{- include "labels.common" . | nindent 4 }}
+  name: {{ include "resource.default.name" . }}
+  namespace: {{ $.Release.Namespace }}
+spec:
+  rules:
+  - host: {{ $.Values.ingress.host }}
+    http:
+      paths:
+      {{- range $provider := $.Values.oauth2Proxy.providers }}
+      - backend:
+          {{- if eq (len $.Values.oauth2Proxy.providers) 1}}
+          serviceName: {{ include "resource.default.name"  $ }}
+          {{- else }}
+          serviceName: {{ $provider.id }}-{{ include "resource.default.name"  $ }}
+          {{- end}}
+          servicePort: {{ $.Values.port.port }}
+        {{- if eq (len $.Values.oauth2Proxy.providers) 1}}
+        path: /oauth2
+        {{- else }}
+        path: /{{ $provider.id }}/oauth2
+        {{- end}}
+      {{- end }}
+  tls:
+  - hosts:
+    - {{ $.Values.ingress.host }}
+    secretName: {{ $.Values.ingress.certSecretName }}
+{{- end }}
