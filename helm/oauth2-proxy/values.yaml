@@ -14,6 +14,7 @@ ingress:
     enabled: true
   host: ""
   certSecretName: "oauth2-proxy"
+  className: "nginx"
 
 oauth2Proxy:
   defaultProvider: oidc
