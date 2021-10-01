@@ -16,8 +16,8 @@ ingress:
   certSecretName: "oauth2-proxy"
   className: "nginx"
   # Additional annotations to apply to the ingress.
-  extraAnnotations: []
-
+  extraAnnotations: {}
+  # key: value
 
 oauth2Proxy:
   defaultProvider: oidc
