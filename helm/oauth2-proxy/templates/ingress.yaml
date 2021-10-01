@@ -11,6 +11,9 @@ metadata:
     {{- if .Values.ingress.letsencrypt.enabled }}
     acme.cert-manager.io/http01-ingress-class: {{ .Values.ingress.className | quote }}
     {{- end }}
+    {{- range $key, $val := .Values.ingress.extraAnnotations }}
+    {{ $key }}: {{ $val }}
+    {{- end }}
   labels:
     {{- include "labels.common" . | nindent 4 }}
   name: {{ include "resource.default.name" . }}
