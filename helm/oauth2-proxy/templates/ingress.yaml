@@ -8,11 +8,15 @@ kind: Ingress
 metadata:
   annotations:
     kubernetes.io/tls-acme: {{ .Values.ingress.letsencrypt.enabled | quote }}
+    {{- if .Values.ingress.letsencrypt.enabled }}
+    acme.cert-manager.io/http01-ingress-class: {{ .Values.ingress.className | quote }}
+    {{- end }}
   labels:
     {{- include "labels.common" . | nindent 4 }}
   name: {{ include "resource.default.name" . }}
   namespace: {{ $.Release.Namespace }}
 spec:
+  ingressClassName: {{ .Values.ingress.className | quote }}
   rules:
   - host: {{ $.Values.ingress.host }}
     http:
