@@ -12,7 +12,7 @@ metadata:
     acme.cert-manager.io/http01-ingress-class: {{ .Values.ingress.className | quote }}
     {{- end }}
     {{- range $key, $val := .Values.ingress.extraAnnotations }}
-    {{ $key }}: {{ $val }}
+    {{ $key }}: {{ $val | quote }}
     {{- end }}
   labels:
     {{- include "labels.common" . | nindent 4 }}
