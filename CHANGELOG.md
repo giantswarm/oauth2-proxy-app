@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Fixed
+
+- Fix lack of quoting on extra annotation values that causes issues for booleans.
+
 ## [2.2.0] - 2021-10-01
 
 ### Added
