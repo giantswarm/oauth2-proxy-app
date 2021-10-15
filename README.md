@@ -2,7 +2,7 @@
 
 Reverse OAuth2 Proxy that handles authentication for GS web frontends.
 
-It is build upon the [oauth2_proxy/oauth2_proxy](https://github.com/oauth2_proxy/oauth2_proxy), with the configuration:
+It is build upon the [oauth2-proxy/oauth2-proxy](https://github.com/oauth2-proxy/oauth2-proxy), with the configuration:
 
 ```bash
 --cookie-expire=24h0m0s
@@ -15,7 +15,7 @@ It is build upon the [oauth2_proxy/oauth2_proxy](https://github.com/oauth2_proxy
 --validate-url=https://giantswarm.eu.auth0.com/userinfo
 ```
 
-More options can be found [here](https://github.com/bitly/oauth2_proxy#command-line-options).
+More options can be found in the [command line options documentation](https://oauth2-proxy.github.io/oauth2-proxy/docs/configuration/overview/#command-line-options).
 
 
 ## Current supported Services at Giant Swarm:
