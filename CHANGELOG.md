@@ -11,6 +11,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Add icon
 
+### Changed
+
+- Update upstream links in README
+
 ## [2.2.1] - 2021-10-04
 
 ### Fixed
