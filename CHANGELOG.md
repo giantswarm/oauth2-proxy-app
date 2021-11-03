@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.2.3] - 2021-11-03
+
 ## [2.2.2] - 2021-10-15
 
 ### Added
@@ -87,7 +89,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Push `g8s-oauth2-proxy` chart into `control-plane` catalog instead of quay.io.
 - Push `g8s-oauth2-proxy` app CRs into `<provider>-app-collection` repository.
 
-[Unreleased]: https://github.com/giantswarm/oauth2-proxy-app/compare/v2.2.2...HEAD
+[Unreleased]: https://github.com/giantswarm/oauth2-proxy-app/compare/v2.2.3...HEAD
+[2.2.3]: https://github.com/giantswarm/oauth2-proxy-app/compare/v2.2.2...v2.2.3
 [2.2.2]: https://github.com/giantswarm/oauth2-proxy-app/compare/v2.2.1...v2.2.2
 [2.2.1]: https://github.com/giantswarm/oauth2-proxy-app/compare/v2.2.0...v2.2.1
 [2.2.0]: https://github.com/giantswarm/oauth2-proxy-app/compare/v2.1.0...v2.2.0
