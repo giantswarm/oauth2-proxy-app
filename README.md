@@ -1,6 +1,6 @@
 # oauth2-proxy-app
 
-Reverse OAuth2 Proxy that handles authentication for GS web frontends.
+Reverse OAuth2 proxy that handles authentication for GS web frontends.
 
 It is build upon the [oauth2-proxy/oauth2-proxy](https://github.com/oauth2-proxy/oauth2-proxy), with the configuration:
 
@@ -18,7 +18,8 @@ It is build upon the [oauth2-proxy/oauth2-proxy](https://github.com/oauth2-proxy
 More options can be found in the [command line options documentation](https://oauth2-proxy.github.io/oauth2-proxy/docs/configuration/overview/#command-line-options).
 
 
-## Current supported Services at Giant Swarm:
+## Current supported Services at Giant Swarm
+
 - Prometheus operator managed Prometheus and Alertmanager
 - G8s-Alertmanager
 - G8s-Alertmanager-Dashboard
@@ -28,11 +29,12 @@ More options can be found in the [command line options documentation](https://oa
 1. Add following annotations to the existing ingress:
     ```yaml
     annotations:
-    nginx.ingress.kubernetes.io/auth-signin: https://$host/oauth2/start
-    nginx.ingress.kubernetes.io/auth-url: https://$host/oauth2/auth
+      nginx.ingress.kubernetes.io/auth-signin: https://$host/oauth2/start
+      nginx.ingress.kubernetes.io/auth-url: https://$host/oauth2/auth
     ```
 
 2. Create a new oauth2 ingress together with the existing ingress
+
     ```yaml
     apiVersion: extensions/v1beta1
     kind: Ingress
@@ -49,7 +51,8 @@ More options can be found in the [command line options documentation](https://oa
             serviceName: oauth2-proxy
             servicePort: 4180
     ```
-    If SSL is enabled, add the same certificate from the existing ingress, to the oauth2 ingress.
+    
+    If TLS is enabled, add the same certificate from the existing ingress, to the oauth2 ingress.
 
 3. Add to Service URL to the list of allowed Callback URLs in [Auth0](https://manage.auth0.com/#/):
 
