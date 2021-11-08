@@ -12,6 +12,8 @@ ingress:
   enabled: false
   letsencrypt:
     enabled: true
+  tls:
+    enabled: true
   host: ""
   certSecretName: "oauth2-proxy"
   className: "nginx"
