@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed 
+
+- Allow disabling TLS.
+
 ## [2.2.4] - 2021-11-04
 
 - Metadata update
