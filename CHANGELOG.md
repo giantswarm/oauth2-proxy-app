@@ -7,9 +7,18 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- Ability to configure extra arguments for the oauth2-proxy container per provider (`oauth2Proxy.provider[].extraArgs`)
+- Ability to configure extra arguments for the oauth2-proxy container for all providers (`oauth2Proxy.extraArgs`)
+
+### Changed
+
+- Upgrade to upstream version [v7.2.0](https://github.com/oauth2-proxy/oauth2-proxy/releases/tag/v7.2.0)
+
 ## [2.3.0] - 2021-11-08
 
-### Changed 
+### Changed
 
 - Allow disabling TLS.
 
