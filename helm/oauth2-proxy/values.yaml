@@ -41,3 +41,5 @@ oauth2Proxy:
     clientID: ""
     clientSecret: ""
     cookieSecret: ""
+    extraArgs: []
+  extraArgs: []
