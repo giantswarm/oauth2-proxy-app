@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.4.0] - 2021-11-16
+
 ### Added
 
 - Ability to configure extra arguments for the oauth2-proxy container per provider (`oauth2Proxy.provider[].extraArgs`)
@@ -110,7 +112,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Push `g8s-oauth2-proxy` chart into `control-plane` catalog instead of quay.io.
 - Push `g8s-oauth2-proxy` app CRs into `<provider>-app-collection` repository.
 
-[Unreleased]: https://github.com/giantswarm/oauth2-proxy-app/compare/v2.3.0...HEAD
+[Unreleased]: https://github.com/giantswarm/oauth2-proxy-app/compare/v2.4.0...HEAD
+[2.4.0]: https://github.com/giantswarm/oauth2-proxy-app/compare/v2.3.0...v2.4.0
 [2.3.0]: https://github.com/giantswarm/oauth2-proxy-app/compare/v2.2.4...v2.3.0
 [2.2.4]: https://github.com/giantswarm/oauth2-proxy-app/compare/v2.2.3...v2.2.4
 [2.2.3]: https://github.com/giantswarm/oauth2-proxy-app/compare/v2.2.2...v2.2.3
