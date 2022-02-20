@@ -1,3 +1,6 @@
+# Use nameOverride to change the names of resources
+# nameOverride: "my-oauth2-proxy"
+
 port:
   name: oauth2-proxy
   port: 4180
