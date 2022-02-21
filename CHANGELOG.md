@@ -7,6 +7,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed
+
+- Upgrade to upstream version [v7.2.1](https://github.com/oauth2-proxy/oauth2-proxy/releases/tag/v7.2.1)
+- Add `application.giantswarm.io/team` to default labels
+
 ## [2.4.0] - 2021-11-16
 
 ### Added
