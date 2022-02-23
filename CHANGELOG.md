@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- Add `nameOverride` to values
+
 ### Changed
 
 - Upgrade to upstream version [v7.2.1](https://github.com/oauth2-proxy/oauth2-proxy/releases/tag/v7.2.1)
