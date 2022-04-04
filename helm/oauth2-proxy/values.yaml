@@ -17,8 +17,9 @@ ingress:
     enabled: true
   tls:
     enabled: true
+  # Deprecated. Please use the `hosts` array instead. `host` will be removed with the next major release.
   host: ""
-  # If used, will replace host
+  # `hosts` is used to configure one or several host names to listen to. Takes precedence over `host`, unless it's an empty array.
   hosts: []
   certSecretName: "oauth2-proxy"
   className: "nginx"
