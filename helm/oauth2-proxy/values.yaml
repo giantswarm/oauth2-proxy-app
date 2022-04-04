@@ -18,6 +18,8 @@ ingress:
   tls:
     enabled: true
   host: ""
+  # If used, will replace host
+  hosts: []
   certSecretName: "oauth2-proxy"
   className: "nginx"
   # Additional annotations to apply to the ingress.
