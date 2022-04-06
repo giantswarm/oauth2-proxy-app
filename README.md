@@ -36,7 +36,7 @@ More options can be found in the [command line options documentation](https://oa
 2. Create a new oauth2 ingress together with the existing ingress
 
     ```yaml
-    apiVersion: extensions/v1beta1
+    apiVersion: networking.k8s.io/v1
     kind: Ingress
     metadata:
     name: {{ Your.Service.Name }}-oauth2-proxy
@@ -45,11 +45,14 @@ More options can be found in the [command line options documentation](https://oa
     rules:
     - host: {{ Your.Service.URL }}
         http:
-        paths:
-        - path: /oauth2
-            backend:
-            serviceName: oauth2-proxy
-            servicePort: 4180
+          paths:
+          - backend:
+              service:
+                  name: oauth2-proxy
+                  port:
+                  number: 4180
+            path: /oauth2
+            pathType: ImplementationSpecific
     ```
     
     If TLS is enabled, add the same certificate from the existing ingress, to the oauth2 ingress.
