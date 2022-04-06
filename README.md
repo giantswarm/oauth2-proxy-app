@@ -17,7 +17,6 @@ It is build upon the [oauth2-proxy/oauth2-proxy](https://github.com/oauth2-proxy
 
 More options can be found in the [command line options documentation](https://oauth2-proxy.github.io/oauth2-proxy/docs/configuration/overview/#command-line-options).
 
-
 ## Current supported Services at Giant Swarm
 
 - Prometheus operator managed Prometheus and Alertmanager
@@ -27,6 +26,7 @@ More options can be found in the [command line options documentation](https://oa
 ## Add authentication/authorization to a web frontend
 
 1. Add following annotations to the existing ingress:
+
     ```yaml
     annotations:
       nginx.ingress.kubernetes.io/auth-signin: https://HOST/oauth2/start
@@ -54,16 +54,16 @@ More options can be found in the [command line options documentation](https://oa
             path: /oauth2
             pathType: ImplementationSpecific
     ```
-    
+
     If TLS is enabled, add the same certificate from the existing ingress, to the oauth2 ingress.
 
 3. Add to Service URL to the list of allowed Callback URLs in [Auth0](https://manage.auth0.com/#/):
 
     Navigate to the Application `OAuth2-Proxy` and enter the service URL in the
     list of allowed Callback URLs with the following scheme:
-    ```
+
+    ```nohighlight
     https://{{ Your.Service.URL }}/oauth2/callback
     ```
+
     This has to be done for every installation separately.
-
-
