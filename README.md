@@ -29,8 +29,8 @@ More options can be found in the [command line options documentation](https://oa
 1. Add following annotations to the existing ingress:
     ```yaml
     annotations:
-      nginx.ingress.kubernetes.io/auth-signin: https://$host/oauth2/start
-      nginx.ingress.kubernetes.io/auth-url: https://$host/oauth2/auth
+      nginx.ingress.kubernetes.io/auth-signin: https://HOST/oauth2/start
+      nginx.ingress.kubernetes.io/auth-url: https://HOST/oauth2/auth
     ```
 
 2. Create a new oauth2 ingress together with the existing ingress
