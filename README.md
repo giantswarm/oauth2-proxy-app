@@ -48,11 +48,10 @@ More options can be found in the [command line options documentation](https://oa
           paths:
           - backend:
               service:
-                  name: oauth2-proxy
-                  port:
+                name: oauth2-proxy
+                port:
                   number: 4180
             path: /oauth2
-            pathType: ImplementationSpecific
     ```
 
     If TLS is enabled, add the same certificate from the existing ingress, to the oauth2 ingress.
