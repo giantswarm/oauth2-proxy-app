@@ -30,9 +30,9 @@ ingress:
   # Prefix of the TLS secrets in the case of multiple hosts,
   # or name of the secret in case of only one host (if Let's Encrypt is enabled)
   certSecretName: "oauth2-proxy"
-  
+
   className: "nginx"
-  
+
   # Additional annotations to apply to the ingress.
   extraAnnotations: {}
   # key: value
