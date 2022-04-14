@@ -1,0 +1,144 @@
+{
+    "$schema": "http://json-schema.org/schema#",
+    "type": "object",
+    "properties": {
+        "groupID": {
+            "type": "integer"
+        },
+        "ingress": {
+            "type": "object",
+            "properties": {
+                "certSecretName": {
+                    "type": "string"
+                },
+                "className": {
+                    "type": "string"
+                },
+                "enabled": {
+                    "type": "boolean"
+                },
+                "extraAnnotations": {
+                    "type": "object"
+                },
+                "host": {
+                    "type": "string"
+                },
+                "letsencrypt": {
+                    "type": "object",
+                    "properties": {
+                        "enabled": {
+                            "type": "boolean"
+                        }
+                    }
+                },
+                "tls": {
+                    "type": "object",
+                    "properties": {
+                        "enabled": {
+                            "type": "boolean"
+                        }
+                    }
+                }
+            }
+        },
+        "oauth2Proxy": {
+            "type": "object",
+            "properties": {
+                "cookie": {
+                    "type": "object",
+                    "properties": {
+                        "expiry": {
+                            "type": "string"
+                        },
+                        "refresh": {
+                            "type": "string"
+                        }
+                    }
+                },
+                "defaultProvider": {
+                    "type": "string"
+                },
+                "emailDomain": {
+                    "type": "string"
+                },
+                "extraArgs": {
+                    "type": "array"
+                },
+                "oidc": {
+                    "type": "object",
+                    "properties": {
+                        "issuerURL": {
+                            "type": "string"
+                        },
+                        "loginURL": {
+                            "type": "string"
+                        },
+                        "profileURL": {
+                            "type": "string"
+                        },
+                        "redeemURL": {
+                            "type": "string"
+                        },
+                        "validateURL": {
+                            "type": "string"
+                        }
+                    }
+                },
+                "providers": {
+                    "type": "array",
+                    "items": {
+                        "type": "object",
+                        "properties": {
+                            "clientID": {
+                                "type": "string"
+                            },
+                            "clientSecret": {
+                                "type": "string"
+                            },
+                            "cookieSecret": {
+                                "type": "string"
+                            },
+                            "extraArgs": {
+                                "type": "array"
+                            },
+                            "id": {
+                                "type": "string"
+                            },
+                            "provider": {
+                                "type": "string"
+                            }
+                        }
+                    }
+                },
+                "setAuthorizationHeader": {
+                    "type": "boolean"
+                },
+                "skipProviderButton": {
+                    "type": "boolean"
+                }
+            }
+        },
+        "port": {
+            "type": "object",
+            "properties": {
+                "name": {
+                    "type": "string"
+                },
+                "port": {
+                    "type": "integer"
+                }
+            }
+        },
+        "registry": {
+            "type": "object",
+            "properties": {
+                "domain": {
+                    "type": "string"
+                }
+            }
+        },
+        "userID": {
+            "type": "integer"
+        }
+    }
+}
