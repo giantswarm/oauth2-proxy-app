@@ -15,7 +15,7 @@ metadata:
     oauth2-proxy.provider: {{ $provider.id }}
     {{- end}}
 spec:
-  replicas: 2
+  replicas: 3
   selector:
     matchLabels:
       {{- include "labels.selector" $ | nindent 6 }}
