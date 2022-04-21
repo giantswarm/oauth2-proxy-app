@@ -23,6 +23,9 @@
                 "host": {
                     "type": "string"
                 },
+                "hosts": {
+                    "type": "array"
+                },
                 "letsencrypt": {
                     "type": "object",
                     "properties": {
