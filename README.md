@@ -52,6 +52,7 @@ More options can be found in the [command line options documentation](https://oa
                 port:
                   number: 4180
             path: /oauth2
+            pathType: Prefix
     ```
 
     If TLS is enabled, add the same certificate from the existing ingress, to the oauth2 ingress.
