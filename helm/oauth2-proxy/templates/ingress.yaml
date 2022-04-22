@@ -21,6 +21,7 @@ metadata:
 spec:
   ingressClassName: {{ .Values.ingress.className | quote }}
   rules:
+  {{- if eq (len .Values.ingress.hosts) 0 -}}
   - host: {{ $.Values.ingress.host }}
     http:
       paths:
@@ -50,10 +51,55 @@ spec:
         {{- end}}
         pathType: ImplementationSpecific
       {{- end }}
+  {{- end }}
+  {{- range .Values.ingress.hosts }}
+  - host: {{ tpl . $ }}
+    http:
+      paths:
+      {{- range $provider := $.Values.oauth2Proxy.providers }}
+      - backend:
+        {{- if $.Capabilities.APIVersions.Has "networking.k8s.io/v1/Ingress" }}
+          service:
+          {{- if eq (len $.Values.oauth2Proxy.providers) 1}}
+            name: {{ include "resource.default.name"  $ }}
+          {{- else }}
+            name: {{ $provider.id }}-{{ include "resource.default.name"  $ }}
+          {{- end}}
+            port:
+              number: {{ $.Values.port.port }}
+        {{- else }}
+        {{- if eq (len $.Values.oauth2Proxy.providers) 1}}
+          serviceName: {{ include "resource.default.name"  $ }}
+        {{- else }}
+          serviceName: {{ $provider.id }}-{{ include "resource.default.name"  $ }}
+        {{- end}}
+          servicePort: {{ $.Values.port.port }}
+        {{- end }}
+      {{- if eq (len $.Values.oauth2Proxy.providers) 1}}
+        path: /oauth2
+      {{- else }}
+        path: /{{ $provider.id }}/oauth2
+      {{- end}}
+        pathType: ImplementationSpecific
+      {{- end }}
+    {{- end }}
   {{- if .Values.ingress.tls.enabled }}
   tls:
+
+  {{- if eq (len .Values.ingress.hosts) 0 -}}
   - hosts:
     - {{ $.Values.ingress.host }}
     secretName: {{ $.Values.ingress.certSecretName }}
+  {{- else if eq (len .Values.ingress.hosts) 1 }}
+  - hosts:
+    - {{ .Values.ingress.hosts | index 0 }}
+    secretName: {{ $.Values.ingress.certSecretName }}
+  {{- else }}
+  {{- range .Values.ingress.hosts }}
+  - hosts:
+    - {{ tpl . $ }}
+    secretName: oauth-proxy-{{ regexReplaceAll "\\W+" (tpl . $) "-" }}
+  {{- end }}
+  {{- end }}
   {{- end }}
 {{- end }}
