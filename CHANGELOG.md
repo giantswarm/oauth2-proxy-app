@@ -9,6 +9,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [2.6.0] - 2022-04-25
 
+### Added
+
+- Add support for multiple host names
+
 ## [2.5.0] - 2022-02-25
 
 ### Added
