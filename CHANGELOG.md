@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.6.0] - 2022-04-25
+
+### Added
+
+- Add support for multiple host names
+
 ## [2.5.0] - 2022-02-25
 
 ### Added
@@ -123,7 +129,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Push `g8s-oauth2-proxy` chart into `control-plane` catalog instead of quay.io.
 - Push `g8s-oauth2-proxy` app CRs into `<provider>-app-collection` repository.
 
-[Unreleased]: https://github.com/giantswarm/oauth2-proxy-app/compare/v2.5.0...HEAD
+[Unreleased]: https://github.com/giantswarm/oauth2-proxy-app/compare/v2.6.0...HEAD
+[2.6.0]: https://github.com/giantswarm/oauth2-proxy-app/compare/v2.5.0...v2.6.0
 [2.5.0]: https://github.com/giantswarm/oauth2-proxy-app/compare/v2.4.0...v2.5.0
 [2.4.0]: https://github.com/giantswarm/oauth2-proxy-app/compare/v2.3.0...v2.4.0
 [2.3.0]: https://github.com/giantswarm/oauth2-proxy-app/compare/v2.2.4...v2.3.0
