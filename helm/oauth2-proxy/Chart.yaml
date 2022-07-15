@@ -5,10 +5,8 @@ home: https://github.com/giantswarm/oauth2-proxy-app
 version: "2.5.0"
 appVersion: "7.2.1"
 annotations:
-  application.giantswarm.io/team: team-rainbow
+  application.giantswarm.io/team: team-cabbage
   config.giantswarm.io/version: 1.x.x
-  application.giantswarm.io/readme: https://raw.githubusercontent.com/giantswarm/oauth2-proxy-app/v[[ .Version ]]/README.md
-  application.giantswarm.io/values-schema: https://raw.githubusercontent.com/giantswarm/oauth2-proxy-app/v[[ .Version ]]/helm/oauth2-proxy-app/values.schema.json
 icon: https://s.giantswarm.io/app-icons/oauth2-proxy/1/light.svg
 sources:
   - https://github.com/oauth2-proxy/oauth2-proxy
