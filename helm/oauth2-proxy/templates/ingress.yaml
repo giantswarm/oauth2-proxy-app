@@ -21,7 +21,7 @@ metadata:
 spec:
   ingressClassName: {{ .Values.ingress.className | quote }}
   rules:
-  {{- if eq (len .Values.ingress.hosts) 0 -}}
+  {{- if eq (len .Values.ingress.hosts) 0 }}
   - host: {{ $.Values.ingress.host }}
     http:
       paths:
@@ -85,14 +85,13 @@ spec:
     {{- end }}
   {{- if .Values.ingress.tls.enabled }}
   tls:
-
-  {{- if eq (len .Values.ingress.hosts) 0 -}}
+  {{- if eq (len .Values.ingress.hosts) 0 }}
   - hosts:
     - {{ $.Values.ingress.host }}
     secretName: {{ $.Values.ingress.certSecretName }}
   {{- else if eq (len .Values.ingress.hosts) 1 }}
   - hosts:
-    - {{ .Values.ingress.hosts | index 0 }}
+    - {{ index .Values.ingress.hosts 0 }}
     secretName: {{ $.Values.ingress.certSecretName }}
   {{- else }}
   {{- range .Values.ingress.hosts }}
