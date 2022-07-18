@@ -58,5 +58,8 @@ oauth2Proxy:
     clientSecret: ""
     # cookieSecret must be 16, 24, or 32 bytes long
     cookieSecret: ""
+    # Use an existing secret for OAuth2 credentials (see secret.yaml for required fields)
+    # Example:
+    # existingSecret: secret
     extraArgs: []
   extraArgs: []
