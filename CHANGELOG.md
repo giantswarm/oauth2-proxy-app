@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- Add support for specifying an existing Secret for provider credentials. Each provider specified in `oauth2Proxy.providers` now supports specifying an existing Secret with fields `cookie-secret`, `client-secret` and `client-id` by setting `oauth2Proxy.providers[].existingSecret` to the name of an existing Secret.
+
 ## [2.6.1] - 2022-07-15
 
 ### Fixed

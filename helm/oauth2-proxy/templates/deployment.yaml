@@ -1,3 +1,4 @@
+{{- $singleProvider := (eq (len .Values.oauth2Proxy.providers) 1) -}}
 {{- range $provider := $.Values.oauth2Proxy.providers }}
 ---
 apiVersion: apps/v1
@@ -76,32 +77,19 @@ spec:
         - name: OAUTH2_PROXY_CLIENT_ID
           valueFrom:
             secretKeyRef:
-              name: {{ include "resource.default.name" $ }}
-              {{- if eq (len $.Values.oauth2Proxy.providers) 1}}
-              key: client-id
-              {{- else }}
-              key: {{ $provider.id }}-client-id
-              {{- end}}
+              name: {{ default (include "resource.default.name" $) $provider.existingSecret }}
+              key: {{ ternary "client-id" (printf "%s-client-id" .id) (or (not (empty $provider.existingSecret)) $singleProvider) }}
         - name: OAUTH2_PROXY_CLIENT_SECRET
           valueFrom:
             secretKeyRef:
-              name: {{ include "resource.default.name" $ }}
-              {{- if eq (len $.Values.oauth2Proxy.providers) 1}}
-              key: client-secret
-              {{- else }}
-              key: {{ $provider.id }}-client-secret
-              {{- end}}
-        {{- if $provider.cookieSecret }}
+              name: {{ default (include "resource.default.name" $) $provider.existingSecret }}
+              key: {{ ternary "client-secret" (printf "%s-client-secret" .id) (or (not (empty $provider.existingSecret)) $singleProvider) }}
         - name: OAUTH2_PROXY_COOKIE_SECRET
           valueFrom:
             secretKeyRef:
-              name: {{ include "resource.default.name" $ }}
-              {{- if eq (len $.Values.oauth2Proxy.providers) 1}}
-              key: cookie-secret
-              {{- else }}
-              key: {{ $provider.id }}-cookie-secret
-              {{- end}}
-        {{- end }}
+              name: {{ default (include "resource.default.name" $) $provider.existingSecret }}
+              key: {{ ternary "cookie-secret" (printf "%s-cookie-secret" .id) (or (not (empty $provider.existingSecret)) $singleProvider) }}
+              optional: true
         ports:
         - name: {{ $.Values.port.name }}
           containerPort: 4180

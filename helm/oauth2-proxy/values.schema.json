@@ -101,6 +101,9 @@
                             "cookieSecret": {
                                 "type": "string"
                             },
+                            "existingSecret": {
+                                "type": ["null", "string"]
+                            },
                             "extraArgs": {
                                 "type": "array"
                             },
