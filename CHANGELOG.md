@@ -7,6 +7,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+
+### Added
+
+- Add support for additional environment variables
+
+### Changed
+
+- Add acme annotation only if letsencrypt is explicitly enabled which should make it possible to use other cert-issuers without having conflicting annotation values
+
 ## [2.7.1] - 2022-08-05
 
 ## [2.7.0] - 2022-07-19
