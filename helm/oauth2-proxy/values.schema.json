@@ -67,6 +67,9 @@
                 "extraArgs": {
                     "type": "array"
                 },
+                "extraEnv": {
+                    "type": "array"
+                },
                 "oidc": {
                     "type": "object",
                     "properties": {

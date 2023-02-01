@@ -64,3 +64,5 @@ oauth2Proxy:
     extraArgs: []
   extraArgs: []
   extraEnv: []
+  # - name: key
+  #   value: value
