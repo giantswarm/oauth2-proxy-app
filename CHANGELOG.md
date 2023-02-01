@@ -7,6 +7,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.8.0] - 2023-02-01
+
+### Added
+
+- Add support for additional environment variables
+
+### Changed
+
+- Add acme annotation only if letsencrypt is explicitly enabled which should make it possible to use other cert-issuers without having conflicting annotation values
+
 ## [2.7.1] - 2022-08-05
 
 ## [2.7.0] - 2022-07-19
@@ -143,7 +153,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Push `g8s-oauth2-proxy` chart into `control-plane` catalog instead of quay.io.
 - Push `g8s-oauth2-proxy` app CRs into `<provider>-app-collection` repository.
 
-[Unreleased]: https://github.com/giantswarm/oauth2-proxy-app/compare/v2.7.1...HEAD
+[Unreleased]: https://github.com/giantswarm/oauth2-proxy-app/compare/v2.8.0...HEAD
+[2.8.0]: https://github.com/giantswarm/oauth2-proxy-app/compare/v2.7.1...v2.8.0
 [2.7.1]: https://github.com/giantswarm/oauth2-proxy-app/compare/v2.7.0...v2.7.1
 [2.7.0]: https://github.com/giantswarm/oauth2-proxy-app/compare/v2.6.1...v2.7.0
 [2.6.1]: https://github.com/giantswarm/oauth2-proxy-app/compare/v2.6.0...v2.6.1
