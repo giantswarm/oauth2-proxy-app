@@ -90,6 +90,9 @@ spec:
               name: {{ default (include "resource.default.name" $) $provider.existingSecret }}
               key: {{ ternary "cookie-secret" (printf "%s-cookie-secret" .id) (or (not (empty $provider.existingSecret)) $singleProvider) }}
               optional: true
+        {{- with $.Values.oauth2Proxy.extraEnv }}
+        {{- toYaml . | nindent 8 }}
+        {{- end }}
         ports:
         - name: {{ $.Values.port.name }}
           containerPort: 4180

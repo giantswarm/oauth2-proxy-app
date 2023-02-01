@@ -63,3 +63,4 @@ oauth2Proxy:
     # existingSecret: secret
     extraArgs: []
   extraArgs: []
+  extraEnv: []
