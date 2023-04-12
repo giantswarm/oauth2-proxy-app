@@ -1,3 +1,4 @@
+{{- if .Capabilities.APIVersions.Has "policy/v1beta1" }}
 apiVersion: policy/v1beta1
 kind: PodSecurityPolicy
 metadata:
@@ -5,6 +6,8 @@ metadata:
   namespace: {{ .Release.Namespace }}
   labels:
     {{- include "labels.common" . | nindent 4 }}
+  annotations:
+    seccomp.security.alpha.kubernetes.io/allowedProfileNames: 'runtime/default'
 spec:
   privileged: false
   fsGroup:
@@ -27,3 +30,5 @@ spec:
   hostNetwork: true
   hostIPC: false
   hostPID: true
+  volumes: []
+{{- end }}

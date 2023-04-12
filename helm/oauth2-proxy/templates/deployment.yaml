@@ -35,6 +35,9 @@ spec:
       securityContext:
         runAsUser: {{ $.Values.userID }}
         runAsGroup: {{ $.Values.groupID }}
+        {{- with $.Values.podSecurityContext }}
+          {{- . | toYaml | nindent 8 }}
+        {{- end }}
       containers:
       - image: {{ $.Values.registry.domain }}/giantswarm/oauth2-proxy:v7.2.1
         name: {{ include "resource.default.name" $ }}
@@ -114,4 +117,8 @@ spec:
           requests:
             cpu: 100m
             memory: 100Mi
+        securityContext:
+          {{- with $.Values.securityContext }}
+            {{- . | toYaml | nindent 10 }}
+          {{- end }}
 {{- end }}
