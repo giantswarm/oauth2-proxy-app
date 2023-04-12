@@ -7,8 +7,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
-## [2.8.0] - 2023-02-01
+### Added
 
+- Add PodDisruptionBudget with `maxUnavailable: "25%"`
+- Usage of SeccompProfile in Pod and Container securityContext
+
+### Changed
+
+- Include PodSecurityPolicies only if available. Adds support for Kubernetes 1.25 and higher
+
+## [2.8.0] - 2023-02-01
 
 ### Added
 

@@ -127,6 +127,19 @@
                 }
             }
         },
+        "podSecurityContext": {
+            "type": "object",
+            "properties": {
+                "seccompProfile": {
+                    "type": "object",
+                    "properties": {
+                        "type": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
         "port": {
             "type": "object",
             "properties": {
@@ -143,6 +156,19 @@
             "properties": {
                 "domain": {
                     "type": "string"
+                }
+            }
+        },
+        "securityContext": {
+            "type": "object",
+            "properties": {
+                "seccompProfile": {
+                    "type": "object",
+                    "properties": {
+                        "type": {
+                            "type": "string"
+                        }
+                    }
                 }
             }
         },
