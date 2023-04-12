@@ -45,20 +45,6 @@ workflows:
 
       - architect/push-to-app-collection:
           context: architect
-          name: push-oauth2-proxy-to-shared-app-collection
-          app_name: "oauth2-proxy"
-          app_namespace: "monitoring"
-          app_collection_repo: "shared-app-collection"
-          requires:
-            - push-to-control-plane-app-catalog
-          filters:
-            branches:
-              ignore: /.*/
-            tags:
-              only: /^v.*/
-
-      - architect/push-to-app-collection:
-          context: architect
           name: push-oauth2-proxy-to-aws-app-collection
           app_name: "oauth2-proxy"
           app_namespace: "monitoring"
