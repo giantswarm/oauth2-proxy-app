@@ -69,10 +69,15 @@ oauth2Proxy:
 
 # Add seccomp to pod security context
 podSecurityContext:
+  runAsNonRoot: true
   seccompProfile:
     type: RuntimeDefault
 
 # Add seccomp to container security context
 securityContext:
+  allowPrivilegeEscalation: false
+  capabilities:
+    drop:
+    - ALL
   seccompProfile:
     type: RuntimeDefault

@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed
+
+- Update default security context values to make the chart comply to PodSecurityStandard restricted profile.
+
 ### Removed
 
 - Stop pushing to `openstack-app-collection`.
