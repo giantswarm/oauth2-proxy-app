@@ -71,7 +71,7 @@ spec:
         {{- end }}
         - --upstream=file:///dev/null
         {{- if $.Values.serviceMonitor.enabled }}
-          - --metrics-address=0.0.0.0:44180
+        - --metrics-address=0.0.0.0:44180
         {{- end }}
         {{- with $provider.extraArgs }}
         {{- toYaml . | nindent 8 }}
