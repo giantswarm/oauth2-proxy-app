@@ -39,7 +39,7 @@ spec:
           {{- . | toYaml | nindent 8 }}
         {{- end }}
       containers:
-      - image: {{ $.Values.registry.domain }}/giantswarm/oauth2-proxy:v7.2.1
+      - image: {{ $.Values.registry.domain }}/giantswarm/oauth2-proxy:v{{ $.Chart.AppVersion }}
         name: {{ include "resource.default.name" $ }}
         args:
         - --cookie-expire={{ $.Values.oauth2Proxy.cookie.expiry }}
