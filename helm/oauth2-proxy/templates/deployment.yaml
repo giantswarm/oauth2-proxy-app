@@ -101,15 +101,19 @@ spec:
           containerPort: 4180
           protocol: TCP
         livenessProbe:
-          tcpSocket:
-            port: 4180
+          httpGet:
+            path: /ping
+            port: {{ $.Values.port.name }}
           initialDelaySeconds: 5
           timeoutSeconds: 1
         readinessProbe:
-          tcpSocket:
-            port: 4180
+          httpGet:
+            path: /ready
+            port: {{ $.Values.port.name }}
           initialDelaySeconds: 5
-          timeoutSeconds: 1
+          timeoutSeconds: 5
+          successThreshold: 1
+          periodSeconds: 10
         resources:
           limits:
             cpu: 100m

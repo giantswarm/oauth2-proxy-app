@@ -11,6 +11,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Upgrade oauth2-proxy container image tag to [v7.5.1](https://github.com/oauth2-proxy/oauth2-proxy/releases/tag/v7.5.1)
 - Enable read-only root file system by default
+- Change liveness and readiness probes to http endpoints
 
 ## [2.11.0] - 2023-09-28
 
