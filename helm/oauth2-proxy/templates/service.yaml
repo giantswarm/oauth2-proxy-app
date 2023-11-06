@@ -20,7 +20,7 @@ spec:
     port: 4180
     protocol: TCP
     targetPort: {{ $.Values.port.port }}
-{{- if .Values.serviceMonitor.enabled }}
+{{- if $.Values.serviceMonitor.enabled }}
   - name: metrics
     port: 44180
     protocol: TCP
