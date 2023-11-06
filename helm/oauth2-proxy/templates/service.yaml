@@ -20,6 +20,12 @@ spec:
     port: 4180
     protocol: TCP
     targetPort: {{ $.Values.port.port }}
+{{- if .Values.serviceMonitor.enabled }}
+  - name: metrics
+    port: 44180
+    protocol: TCP
+    targetPort: 44180
+{{- end }}
   selector:
     {{- include "labels.selector" $ | nindent 4 }}
     {{- if gt (len $.Values.oauth2Proxy.providers) 1}}
