@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- Enable metrics endpoint and enable scraping using ServiceMonitor
+
 ### Changed
 
 - Upgrade oauth2-proxy container image tag to [v7.5.1](https://github.com/oauth2-proxy/oauth2-proxy/releases/tag/v7.5.1)
