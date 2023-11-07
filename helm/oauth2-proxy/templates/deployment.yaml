@@ -39,7 +39,7 @@ spec:
           {{- . | toYaml | nindent 8 }}
         {{- end }}
       containers:
-      - image: {{ $.Values.registry.domain }}/giantswarm/oauth2-proxy:v7.2.1
+      - image: {{ $.Values.registry.domain }}/giantswarm/oauth2-proxy:v{{ $.Chart.AppVersion }}
         name: {{ include "resource.default.name" $ }}
         args:
         - --cookie-expire={{ $.Values.oauth2Proxy.cookie.expiry }}
@@ -70,6 +70,9 @@ spec:
         - --cookie-secure=false
         {{- end }}
         - --upstream=file:///dev/null
+        {{- if $.Values.serviceMonitor.enabled }}
+        - --metrics-address=0.0.0.0:44180
+        {{- end }}
         {{- with $provider.extraArgs }}
         {{- toYaml . | nindent 8 }}
         {{- end }}
@@ -100,16 +103,25 @@ spec:
         - name: {{ $.Values.port.name }}
           containerPort: 4180
           protocol: TCP
+        {{- if $.Values.serviceMonitor.enabled }}
+        - containerPort: 44180
+          protocol: TCP
+          name: metrics
+        {{- end }}
         livenessProbe:
-          tcpSocket:
-            port: 4180
+          httpGet:
+            path: /ping
+            port: {{ $.Values.port.name }}
           initialDelaySeconds: 5
           timeoutSeconds: 1
         readinessProbe:
-          tcpSocket:
-            port: 4180
+          httpGet:
+            path: /ready
+            port: {{ $.Values.port.name }}
           initialDelaySeconds: 5
-          timeoutSeconds: 1
+          timeoutSeconds: 5
+          successThreshold: 1
+          periodSeconds: 10
         resources:
           limits:
             cpu: 100m

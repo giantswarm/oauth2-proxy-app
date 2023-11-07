@@ -13,8 +13,12 @@ spec:
   - ports:
     - port: {{ .Values.port.port }}
       protocol: TCP
+    {{- if .Values.serviceMonitor.enabled }}
+    - port: 44180
+      protocol: TCP
+    {{- end }}
   egress:
-  - {}  
+  - {}
   policyTypes:
   - Egress
   - Ingress
