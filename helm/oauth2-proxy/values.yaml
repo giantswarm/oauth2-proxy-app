@@ -9,7 +9,7 @@ userID: 1000
 groupID: 1000
 
 registry:
-  domain: docker.io
+  domain: gsoci.azurecr.io
 
 ingress:
   # Set to true to create an ingress resource for the oauth2-proxy service.
