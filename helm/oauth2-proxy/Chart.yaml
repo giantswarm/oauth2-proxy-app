@@ -5,7 +5,7 @@ home: https://github.com/giantswarm/oauth2-proxy-app
 version: "2.13.0"
 appVersion: "7.5.1"
 annotations:
-  application.giantswarm.io/team: team-cabbage
+  application.giantswarm.io/team: atlas
   config.giantswarm.io/version: 1.x.x
 icon: https://s.giantswarm.io/app-icons/oauth2-proxy/1/light.svg
 sources:
