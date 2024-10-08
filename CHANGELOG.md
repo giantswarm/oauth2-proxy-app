@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.14.0] - 2024-10-08
+
 ### Added
 
 - Add new configuration flags needed to let jwt token through.
@@ -211,7 +213,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Push `g8s-oauth2-proxy` chart into `control-plane` catalog instead of quay.io.
 - Push `g8s-oauth2-proxy` app CRs into `<provider>-app-collection` repository.
 
-[Unreleased]: https://github.com/giantswarm/oauth2-proxy-app/compare/v2.13.0...HEAD
+[Unreleased]: https://github.com/giantswarm/oauth2-proxy-app/compare/v2.14.0...HEAD
+[2.14.0]: https://github.com/giantswarm/oauth2-proxy-app/compare/v2.13.0...v2.14.0
 [2.13.0]: https://github.com/giantswarm/oauth2-proxy-app/compare/v2.12.0...v2.13.0
 [2.12.0]: https://github.com/giantswarm/oauth2-proxy-app/compare/v2.11.0...v2.12.0
 [2.11.0]: https://github.com/giantswarm/oauth2-proxy-app/compare/v2.10.0...v2.11.0
