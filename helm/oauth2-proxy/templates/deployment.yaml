@@ -43,35 +43,40 @@ spec:
         name: {{ include "resource.default.name" $ }}
         args:
         - --cookie-expire={{ $.Values.oauth2Proxy.cookie.expiry }}
+        - --cookie-name={{ $.Values.oauth2Proxy.cookie.name }}
         - --cookie-refresh={{ $.Values.oauth2Proxy.cookie.refresh }}
-        - --email-domain={{ $.Values.oauth2Proxy.emailDomain }}
-        - --http-address=0.0.0.0:4180
-        - --provider={{ $provider.provider | default $.Values.oauth2Proxy.defaultProvider }}
-        - --set-authorization-header={{ $.Values.oauth2Proxy.setAuthorizationHeader }}
-        - --skip-provider-button={{ $.Values.oauth2Proxy.skipProviderButton }}
-        {{- if $.Values.oauth2Proxy.oidc.issuerURL }}
-        - --oidc-issuer-url={{ $.Values.oauth2Proxy.oidc.issuerURL }}
-        {{- end }}
-        {{- if $.Values.oauth2Proxy.oidc.loginURL }}
-        - --login-url={{ $.Values.oauth2Proxy.oidc.loginURL }}
-        {{- end }}
-        {{- if $.Values.oauth2Proxy.oidc.redeemURL }}
-        - --redeem-url={{ $.Values.oauth2Proxy.oidc.redeemURL }}
-        {{- end }}
-        {{- if $.Values.oauth2Proxy.oidc.profileURL }}
-        - --profile-url={{ $.Values.oauth2Proxy.oidc.profileURL }}
-        {{- end }}
-        {{- if $.Values.oauth2Proxy.oidc.validateURL }}
-        - --validate-url={{ $.Values.oauth2Proxy.oidc.validateURL }}
-        {{- end }}
         {{- if $provider.cookieSecret }}
         - --cookie-secure=true
         {{- else }}
         - --cookie-secure=false
         {{- end }}
-        - --upstream=file:///dev/null
+        - --email-domain={{ $.Values.oauth2Proxy.emailDomain }}
+        - --http-address=0.0.0.0:4180
+        {{- if $.Values.oauth2Proxy.oidc.loginURL }}
+        - --login-url={{ $.Values.oauth2Proxy.oidc.loginURL }}
+        {{- end }}
         {{- if $.Values.serviceMonitor.enabled }}
         - --metrics-address=0.0.0.0:44180
+        {{- end }}
+        - --passAccessToken={{ $.Values.oauth2Proxy.passAccessToken }}
+        - --passAuthorizationHeader={{ $.Values.oauth2Proxy.passAuthorizationHeader }}
+        {{- if $.Values.oauth2Proxy.oidc.profileURL }}
+        - --profile-url={{ $.Values.oauth2Proxy.oidc.profileURL }}
+        {{- end }}
+        - --provider={{ $provider.provider | default $.Values.oauth2Proxy.defaultProvider }}
+        {{- if $.Values.oauth2Proxy.oidc.issuerURL }}
+        - --oidc-issuer-url={{ $.Values.oauth2Proxy.oidc.issuerURL }}
+        {{- end }}
+        {{- if $.Values.oauth2Proxy.oidc.redeemURL }}
+        - --redeem-url={{ $.Values.oauth2Proxy.oidc.redeemURL }}
+        {{- end }}
+        - --set-authorization-header={{ $.Values.oauth2Proxy.setAuthorizationHeader }}
+        - --set-xauthrequest={{ $.Values.oauth2Proxy.setXAuthRequest }}
+        - --skip-jwt-bearer-tokens={{ $.Values.oauth2Proxy.skipJwtBearerTokens }}
+        - --skip-provider-button={{ $.Values.oauth2Proxy.skipProviderButton }}
+         - --upstream=file:///dev/null
+        {{- if $.Values.oauth2Proxy.oidc.validateURL }}
+        - --validate-url={{ $.Values.oauth2Proxy.oidc.validateURL }}
         {{- end }}
         {{- with $provider.extraArgs }}
         {{- toYaml . | nindent 8 }}

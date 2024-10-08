@@ -41,10 +41,15 @@ oauth2Proxy:
   defaultProvider: oidc
   cookie:
     expiry: 24h0m0s
+    name: SESSION
     refresh: 0h60m0s
   emailDomain: "*"
+  passAccessToken: true
+  passAuthorizationHeader: true
   setAuthorizationHeader: true
+  setXAuthRequest: true
   skipProviderButton: true
+  skipJwtBearerTokens: true
   oidc:
     issuerURL: ""
     loginURL: ""

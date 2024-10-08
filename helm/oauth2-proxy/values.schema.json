@@ -66,6 +66,9 @@
                         "expiry": {
                             "type": "string"
                         },
+                        "name": {
+                            "type": "string"
+                        },
                         "refresh": {
                             "type": "string"
                         }
@@ -103,6 +106,12 @@
                         }
                     }
                 },
+                "passAccessToken": {
+                    "type": "boolean"
+                },
+                "passAuthorizationHeader": {
+                    "type": "boolean"
+                },
                 "providers": {
                     "type": "array",
                     "items": {
@@ -116,9 +125,6 @@
                             },
                             "cookieSecret": {
                                 "type": "string"
-                            },
-                            "existingSecret": {
-                                "type": ["null", "string"]
                             },
                             "extraArgs": {
                                 "type": "array"
@@ -135,6 +141,12 @@
                 "setAuthorizationHeader": {
                     "type": "boolean"
                 },
+                "setXAuthRequest": {
+                    "type": "boolean"
+                },
+                "skipJwtBearerTokens": {
+                    "type": "boolean"
+                },
                 "skipProviderButton": {
                     "type": "boolean"
                 }
@@ -143,6 +155,9 @@
         "podSecurityContext": {
             "type": "object",
             "properties": {
+                "runAsNonRoot": {
+                    "type": "boolean"
+                },
                 "seccompProfile": {
                     "type": "object",
                     "properties": {
@@ -175,6 +190,23 @@
         "securityContext": {
             "type": "object",
             "properties": {
+                "allowPrivilegeEscalation": {
+                    "type": "boolean"
+                },
+                "capabilities": {
+                    "type": "object",
+                    "properties": {
+                        "drop": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        }
+                    }
+                },
+                "readOnlyRootFilesystem": {
+                    "type": "boolean"
+                },
                 "seccompProfile": {
                     "type": "object",
                     "properties": {
