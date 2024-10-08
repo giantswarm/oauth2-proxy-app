@@ -7,10 +7,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- Add new configuration flags needed to let jwt token through.
+
 ### Changed
 
 - Upgrade oauth2-proxy container image tag to [v7.7.0](https://github.com/oauth2-proxy/oauth2-proxy/releases/tag/v7.7.0)
-- Add new configuration flags needed to let jwt token through.
+
+### Removed
+
 - Removes oauth2-proxy from non control plane related catalogs.
 
 ## [2.13.0] - 2023-12-12
