@@ -170,6 +170,9 @@
                             },
                             "skipProviderButton": {
                                 "type": "boolean"
+                            },
+                            "upstream": {
+                                "type": "string"
                             }
                         }
                     }

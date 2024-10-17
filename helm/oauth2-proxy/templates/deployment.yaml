@@ -29,65 +29,85 @@ spec:
       - image: {{ $.Values.registry.domain }}/giantswarm/oauth2-proxy:v{{ $.Chart.AppVersion }}
         name: {{ include "resource.default.name" $ }}
         args:
-        - --cookie-expire={{ $provider.cookie.expiry }}
-        - --cookie-name={{ $provider.cookie.name }}
-        - --cookie-refresh={{ $provider.cookie.refresh }}
+        ## Cookie configuration options
+        {{- with $provider.cookie.expiry }}
+        - --cookie-expire={{ . }}
+        {{- end }}
+        {{- with $provider.cookie.name }}
+        - --cookie-name={{ . }}
+        {{- end }}
+        {{- with $provider.cookie.refresh }}
+        - --cookie-refresh={{ . }}
+        {{- end }}
         {{- if $provider.cookie.secret }}
         - --cookie-secure=true
         {{- else }}
         - --cookie-secure=false
         {{- end }}
-        - --email-domain={{ $provider.emailDomain }}
-        - --http-address=0.0.0.0:4180
-        {{- if $provider.oidc.loginURL }}
-        - --login-url={{ $provider.oidc.loginURL }}
+
+        # OIDC configuration options
+        {{- with $provider.oidc.issuerURL }}
+        - --oidc-issuer-url={{ . }}
         {{- end }}
+        {{- with $provider.oidc.loginURL }}
+        - --login-url={{ . }}
+        {{- end }}
+        {{- with $provider.oidc.profileURL }}
+        - --profile-url={{ . }}
+        {{- end }}
+        {{- with $provider.oidc.redeemURL }}
+        - --redeem-url={{ . }}
+        {{- end }}
+         {{- with $provider.oidc.validateURL }}
+        - --validate-url={{ . }}
+        {{- end }}
+
+        {{- with $provider.emailDomain }}
+        - --email-domain={{ . }}
+        {{- end }}
+
+        - --http-address=0.0.0.0:4180
         {{- if $.Values.serviceMonitor.enabled }}
         - --metrics-address=0.0.0.0:44180
         {{- end }}
-        {{- if $provider.oidc.issuerURL }}
-        - --oidc-issuer-url={{ $provider.oidc.issuerURL }}
-        {{- end }}
+       
         - --pass-access-token={{ $provider.passAccessToken }}
         - --pass-authorization-header={{ $provider.passAuthorizationHeader }}
-        {{- if $provider.oidc.profileURL }}
-        - --profile-url={{ $provider.oidc.profileURL }}
-        {{- end }}
         - --provider={{ $provider.provider }}
-        {{- if $provider.oidc.redeemURL }}
-        - --redeem-url={{ $provider.oidc.redeemURL }}
-        {{- end }}
         - --set-authorization-header={{ $provider.setAuthorizationHeader }}
         - --set-xauthrequest={{ $provider.setXAuthRequest }}
         - --skip-jwt-bearer-tokens={{ $provider.skipJwtBearerTokens }}
         - --skip-provider-button={{ $provider.skipProviderButton }}
-        - --upstream=file:///dev/null
-        {{- if $provider.oidc.validateURL }}
-        - --validate-url={{ $provider.oidc.validateURL }}
+
+        {{- if $provider.upstream }}
+        - --upstream={{ $provider.upstream }}
         {{- end }}
+
         {{- with $provider.extraArgs }}
         {{- toYaml . | nindent 8 }}
         {{- end }}
         {{- with $.Values.oauth2Proxy.extraArgs }}
         {{- toYaml . | nindent 8 }}
         {{- end }}
+
         env:
         - name: OAUTH2_PROXY_CLIENT_ID
           valueFrom:
             secretKeyRef:
-              name: {{ (include "resource.default.name" $)-$provider.id }}
+              name: {{ include "resource.default.name" $ }}-{{ $provider.id }}
               key: "client-id"
         - name: OAUTH2_PROXY_CLIENT_SECRET
           valueFrom:
             secretKeyRef:
-              name: {{ (include "resource.default.name" $)-$provider.id  }}
+              name: {{ include "resource.default.name" $ }}-{{ $provider.id }}
               key: "client-secret"
+        {{- if $provider.cookie.secret }}
         - name: OAUTH2_PROXY_COOKIE_SECRET
           valueFrom:
             secretKeyRef:
-              name: {{ (include "resource.default.name" $)-$provider.id  }}
+              name: {{ include "resource.default.name" $ }}-{{ $provider.id }}
               key: "cookie-secret"
-              optional: true
+        {{- end }}
         {{- with $provider.extraEnv }}
         {{- toYaml . | nindent 8 }}
         {{- end }}

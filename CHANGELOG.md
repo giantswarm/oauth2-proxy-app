@@ -9,7 +9,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
-- Refactor multi-provider support to be able to use different issuers.
+- add full support for multiple oauth providers so we can support both giantswarm and customer use cases.
+- moves all "shared" properties like client-id, cookie-name, pass-access-token under the provider config.
+- align ingress class name with other charts from `ingress.className` to `ingress.ingressClassName`.
+- align pod and container security contexts with other charts.
+
+### Removed
+
+- remove single provider configuration in favor of multiple providers.
+- removes deprecated ingress `host` property.
+- removes the `existingSecret` field as this is not intended for customer use so let's always create it.
+- removes push to aws collection to make sure this does not impact vintage installations.
 
 ## [2.14.1] - 2024-10-17
 

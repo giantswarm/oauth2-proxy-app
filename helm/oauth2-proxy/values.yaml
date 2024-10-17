@@ -33,6 +33,9 @@ ingress:
   # key: value
 
 oauth2Proxy:
+  extraArgs: []
+  extraEnv: []
+
   providers:
   - id: "default"
     provider: "oidc"
@@ -42,27 +45,24 @@ oauth2Proxy:
       expiry: 24h0m0s
       name: SESSION
       refresh: 0h60m0s
-      # cookie secret must be 16, 24, or 32 bytes long
+      # secret must be 16, 24, or 32 bytes long
       secret: ""
     emailDomain: "*"
+    extraArgs: []
+    extraEnv: []
+    oidc:
+      issuerURL: ""
+      loginURL: ""
+      profileURL: ""
+      redeemURL: ""
+      validateURL: ""
     passAccessToken: true
     passAuthorizationHeader: true
     setAuthorizationHeader: true
     setXAuthRequest: true
     skipProviderButton: true
     skipJwtBearerTokens: true
-    oidc:
-      issuerURL: ""
-      loginURL: ""
-      redeemURL: ""
-      validateURL: ""
-      profileURL: ""
-    extraArgs: []
-    extraEnv: []
-  extraArgs: []
-  extraEnv: []
-  # - name: key
-  #   value: value
+    upstream: ""
 
 # Add seccomp to pod security context
 podSecurityContext:
