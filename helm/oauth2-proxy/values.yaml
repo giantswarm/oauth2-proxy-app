@@ -5,9 +5,6 @@ port:
   name: oauth2-proxy
   port: 4180
 
-userID: 1000
-groupID: 1000
-
 registry:
   domain: gsoci.azurecr.io
 
@@ -23,63 +20,54 @@ ingress:
   tls:
     enabled: true
 
-  # Deprecated. Please use the `hosts` array instead. `host` will be removed with the next major release.
-  host: ""
   # `hosts` is used to configure one or several host names to listen to. Takes precedence over `host`, unless it's an empty array.
   hosts: []
   # Prefix of the TLS secrets in the case of multiple hosts,
   # or name of the secret in case of only one host (if Let's Encrypt is enabled)
   certSecretName: "oauth2-proxy"
 
-  className: "nginx"
+  ingressClassName: "nginx"
 
   # Additional annotations to apply to the ingress.
   extraAnnotations: {}
   # key: value
 
 oauth2Proxy:
-  defaultProvider: oidc
-  cookie:
-    expiry: 24h0m0s
-    name: SESSION
-    refresh: 0h60m0s
-  emailDomain: "*"
-  passAccessToken: true
-  passAuthorizationHeader: true
-  setAuthorizationHeader: true
-  setXAuthRequest: true
-  skipProviderButton: true
-  skipJwtBearerTokens: true
-  oidc:
-    issuerURL: ""
-    loginURL: ""
-    redeemURL: ""
-    validateURL: ""
-    profileURL: ""
+  # extra arguments to pass to all oauth2-proxy independant on the provider.
+  extraArgs:
+  - --cookie-expire=24h0m0s
+  - --cookie-name=session
+  - --cookie-refresh=0h60m0s
+  - --cookie-secure=true
+  - --email-domain=*
+  - --pass-access-token=true
+  - --pass-authorization-header=true
+  - --set-authorization-header=true
+  - --set-xauthrequest=true
+  - --skip-jwt-bearer-tokens=true
+  - --skip-provider-button=true
+  extraEnv: []
   providers:
   - id: "default"
     provider: "oidc"
     clientID: ""
     clientSecret: ""
-    # cookieSecret must be 16, 24, or 32 bytes long
+    # secret must be 16, 24, or 32 bytes long
     cookieSecret: ""
-    # Use an existing secret for OAuth2 credentials (see secret.yaml for required fields)
-    # Example:
-    # existingSecret: secret
+    # extra arguments to pass to the oauth2-proxy for this provider.
     extraArgs: []
-  extraArgs: []
-  extraEnv: []
-  # - name: key
-  #   value: value
+    extraEnv: []
 
 # Add seccomp to pod security context
 podSecurityContext:
+  runAsUser: 1000
+  runAsGroup: 1000
   runAsNonRoot: true
   seccompProfile:
     type: RuntimeDefault
 
 # Add seccomp to container security context
-securityContext:
+containerSecurityContext:
   allowPrivilegeEscalation: false
   readOnlyRootFilesystem: true
   capabilities:

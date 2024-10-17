@@ -3,17 +3,11 @@
 apiVersion: v1
 kind: Service
 metadata:
-{{- if eq 1 (len $.Values.oauth2Proxy.providers) }}
-  name: {{ include "resource.default.name"  $ }}
-{{- else }}
-  name: {{ $provider.id }}-{{ include "resource.default.name"  $ }}
-{{- end }}
+  name: {{ include "resource.default.name" $ }}-{{ $provider.id }}
   namespace: {{ $.Release.Namespace }}
   labels:
     {{- include "labels.common" $ | nindent 4 }}
-    {{- if gt (len $.Values.oauth2Proxy.providers) 1}}
     oauth2-proxy.provider: {{ $provider.id }}
-    {{- end}}
 spec:
   ports:
   - name: http
@@ -28,7 +22,5 @@ spec:
   {{- end }}
   selector:
     {{- include "labels.selector" $ | nindent 4 }}
-    {{- if gt (len $.Values.oauth2Proxy.providers) 1}}
     oauth2-proxy.provider: {{ $provider.id }}
-    {{- end}}
 {{- end }}
