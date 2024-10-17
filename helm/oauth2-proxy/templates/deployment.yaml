@@ -29,59 +29,12 @@ spec:
       - image: {{ $.Values.registry.domain }}/giantswarm/oauth2-proxy:v{{ $.Chart.AppVersion }}
         name: {{ include "resource.default.name" $ }}
         args:
-        ## Cookie configuration options
-        {{- with $provider.cookie.expiry }}
-        - --cookie-expire={{ . }}
-        {{- end }}
-        {{- with $provider.cookie.name }}
-        - --cookie-name={{ . }}
-        {{- end }}
-        {{- with $provider.cookie.refresh }}
-        - --cookie-refresh={{ . }}
-        {{- end }}
-        {{- if $provider.cookie.secret }}
-        - --cookie-secure=true
-        {{- else }}
-        - --cookie-secure=false
-        {{- end }}
-
-        # OIDC configuration options
-        {{- with $provider.oidc.issuerURL }}
-        - --oidc-issuer-url={{ . }}
-        {{- end }}
-        {{- with $provider.oidc.loginURL }}
-        - --login-url={{ . }}
-        {{- end }}
-        {{- with $provider.oidc.profileURL }}
-        - --profile-url={{ . }}
-        {{- end }}
-        {{- with $provider.oidc.redeemURL }}
-        - --redeem-url={{ . }}
-        {{- end }}
-         {{- with $provider.oidc.validateURL }}
-        - --validate-url={{ . }}
-        {{- end }}
-
-        {{- with $provider.emailDomain }}
-        - --email-domain={{ . }}
-        {{- end }}
-
         - --http-address=0.0.0.0:4180
         {{- if $.Values.serviceMonitor.enabled }}
         - --metrics-address=0.0.0.0:44180
         {{- end }}
-       
-        - --pass-access-token={{ $provider.passAccessToken }}
-        - --pass-authorization-header={{ $provider.passAuthorizationHeader }}
-        - --provider={{ $provider.provider }}
-        - --set-authorization-header={{ $provider.setAuthorizationHeader }}
-        - --set-xauthrequest={{ $provider.setXAuthRequest }}
-        - --skip-jwt-bearer-tokens={{ $provider.skipJwtBearerTokens }}
-        - --skip-provider-button={{ $provider.skipProviderButton }}
 
-        {{- if $provider.upstream }}
-        - --upstream={{ $provider.upstream }}
-        {{- end }}
+        - --provider={{ $provider.provider | default "oidc" }}
 
         {{- with $provider.extraArgs }}
         {{- toYaml . | nindent 8 }}
@@ -101,7 +54,7 @@ spec:
             secretKeyRef:
               name: {{ include "resource.default.name" $ }}-{{ $provider.id }}
               key: "client-secret"
-        {{- if $provider.cookie.secret }}
+        {{- if $provider.cookieSecret }}
         - name: OAUTH2_PROXY_COOKIE_SECRET
           valueFrom:
             secretKeyRef:

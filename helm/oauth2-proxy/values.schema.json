@@ -85,7 +85,10 @@
             "type": "object",
             "properties": {
                 "extraArgs": {
-                    "type": "array"
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
                 },
                 "extraEnv": {
                     "type": "array"
@@ -101,24 +104,7 @@
                             "clientSecret": {
                                 "type": "string"
                             },
-                            "cookie": {
-                                "type": "object",
-                                "properties": {
-                                    "expiry": {
-                                        "type": "string"
-                                    },
-                                    "name": {
-                                        "type": "string"
-                                    },
-                                    "refresh": {
-                                        "type": "string"
-                                    },
-                                    "secret": {
-                                        "type": "string"
-                                    }
-                                }
-                            },
-                            "emailDomain": {
+                            "cookieSecret": {
                                 "type": "string"
                             },
                             "extraArgs": {
@@ -130,48 +116,7 @@
                             "id": {
                                 "type": "string"
                             },
-                            "oidc": {
-                                "type": "object",
-                                "properties": {
-                                    "issuerURL": {
-                                        "type": "string"
-                                    },
-                                    "loginURL": {
-                                        "type": "string"
-                                    },
-                                    "profileURL": {
-                                        "type": "string"
-                                    },
-                                    "redeemURL": {
-                                        "type": "string"
-                                    },
-                                    "validateURL": {
-                                        "type": "string"
-                                    }
-                                }
-                            },
-                            "passAccessToken": {
-                                "type": "boolean"
-                            },
-                            "passAuthorizationHeader": {
-                                "type": "boolean"
-                            },
                             "provider": {
-                                "type": "string"
-                            },
-                            "setAuthorizationHeader": {
-                                "type": "boolean"
-                            },
-                            "setXAuthRequest": {
-                                "type": "boolean"
-                            },
-                            "skipJwtBearerTokens": {
-                                "type": "boolean"
-                            },
-                            "skipProviderButton": {
-                                "type": "boolean"
-                            },
-                            "upstream": {
                                 "type": "string"
                             }
                         }

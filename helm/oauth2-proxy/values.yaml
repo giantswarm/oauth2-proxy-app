@@ -33,36 +33,30 @@ ingress:
   # key: value
 
 oauth2Proxy:
-  extraArgs: []
+  # extra arguments to pass to all oauth2-proxy independant on the provider.
+  extraArgs:
+  - --cookie-expire=24h0m0s
+  - --cookie-name=session
+  - --cookie-refresh=0h60m0s
+  - --cookie-secure=true
+  - --email-domain=*
+  - --pass-access-token=true
+  - --pass-authorization-header=true
+  - --set-authorization-header=true
+  - --set-xauthrequest=true
+  - --skip-jwt-bearer-tokens=true
+  - --skip-provider-button=true
   extraEnv: []
-
   providers:
   - id: "default"
     provider: "oidc"
     clientID: ""
     clientSecret: ""
-    cookie:
-      expiry: 24h0m0s
-      name: SESSION
-      refresh: 0h60m0s
-      # secret must be 16, 24, or 32 bytes long
-      secret: ""
-    emailDomain: "*"
+    # secret must be 16, 24, or 32 bytes long
+    cookieSecret: ""
+    # extra arguments to pass to the oauth2-proxy for this provider.
     extraArgs: []
     extraEnv: []
-    oidc:
-      issuerURL: ""
-      loginURL: ""
-      profileURL: ""
-      redeemURL: ""
-      validateURL: ""
-    passAccessToken: true
-    passAuthorizationHeader: true
-    setAuthorizationHeader: true
-    setXAuthRequest: true
-    skipProviderButton: true
-    skipJwtBearerTokens: true
-    upstream: ""
 
 # Add seccomp to pod security context
 podSecurityContext:
