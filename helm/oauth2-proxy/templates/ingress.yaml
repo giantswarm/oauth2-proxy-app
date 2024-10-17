@@ -5,7 +5,7 @@ metadata:
   annotations:
     {{- if .Values.ingress.letsencrypt.enabled }}
     kubernetes.io/tls-acme: {{ .Values.ingress.letsencrypt.enabled | quote }}
-    acme.cert-manager.io/http01-ingress-class: {{ .Values.ingress.className | quote }}
+    acme.cert-manager.io/http01-ingress-class: {{ .Values.ingress.ingressClassName | quote }}
     {{- end }}
     {{- range $key, $val := .Values.ingress.extraAnnotations }}
     {{ $key }}: {{ $val | quote }}
@@ -15,30 +15,8 @@ metadata:
   name: {{ include "resource.default.name" . }}
   namespace: {{ $.Release.Namespace }}
 spec:
-  ingressClassName: {{ .Values.ingress.className | quote }}
+  ingressClassName: {{ .Values.ingress.ingressClassName | quote }}
   rules:
-  {{- if eq (len .Values.ingress.hosts) 0 }}
-  - host: {{ $.Values.ingress.host }}
-    http:
-      paths:
-      {{- range $provider := $.Values.oauth2Proxy.providers }}
-      - backend:
-          service:
-            {{- if eq (len $.Values.oauth2Proxy.providers) 1}}
-            name: {{ include "resource.default.name"  $ }}
-            {{- else }}
-            name: {{ $provider.id }}-{{ include "resource.default.name"  $ }}
-            {{- end}}
-            port:
-              number: {{ $.Values.port.port }}
-        {{- if eq (len $.Values.oauth2Proxy.providers) 1}}
-        path: /oauth2
-        {{- else }}
-        path: /{{ $provider.id }}/oauth2
-        {{- end}}
-        pathType: ImplementationSpecific
-      {{- end }}
-  {{- end }}
   {{- range .Values.ingress.hosts }}
   - host: {{ tpl . $ }}
     http:
@@ -46,37 +24,19 @@ spec:
       {{- range $provider := $.Values.oauth2Proxy.providers }}
       - backend:
           service:
-          {{- if eq (len $.Values.oauth2Proxy.providers) 1}}
-            name: {{ include "resource.default.name"  $ }}
-          {{- else }}
-            name: {{ $provider.id }}-{{ include "resource.default.name"  $ }}
-          {{- end}}
+            name: {{ include "resource.default.name" $ }}-{{ $provider.id }}
             port:
               number: {{ $.Values.port.port }}
-      {{- if eq (len $.Values.oauth2Proxy.providers) 1}}
-        path: /oauth2
-      {{- else }}
-        path: /{{ $provider.id }}/oauth2
-      {{- end}}
+        path: /oauth2/{{ $provider.id }}
         pathType: ImplementationSpecific
       {{- end }}
-    {{- end }}
+  {{- end }}
   {{- if .Values.ingress.tls.enabled }}
   tls:
-  {{- if eq (len .Values.ingress.hosts) 0 }}
-  - hosts:
-    - {{ $.Values.ingress.host }}
-    secretName: {{ $.Values.ingress.certSecretName }}
-  {{- else if eq (len .Values.ingress.hosts) 1 }}
-  - hosts:
-    - {{ index .Values.ingress.hosts 0 }}
-    secretName: {{ $.Values.ingress.certSecretName }}
-  {{- else }}
-  {{- range .Values.ingress.hosts }}
-  - hosts:
-    - {{ tpl . $ }}
-    secretName: oauth-proxy-{{ regexReplaceAll "\\W+" (tpl . $) "-" }}
-  {{- end }}
-  {{- end }}
+    {{- range .Values.ingress.hosts }}
+    - hosts:
+      - {{ tpl . $ }}
+      secretName: oauth-proxy-{{ regexReplaceAll "\\W+" (tpl . $) "-" }}
+    {{- end }}
   {{- end }}
 {{- end }}

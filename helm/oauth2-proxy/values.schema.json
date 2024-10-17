@@ -2,6 +2,36 @@
     "$schema": "http://json-schema.org/schema#",
     "type": "object",
     "properties": {
+        "containerSecurityContext": {
+            "type": "object",
+            "properties": {
+                "allowPrivilegeEscalation": {
+                    "type": "boolean"
+                },
+                "capabilities": {
+                    "type": "object",
+                    "properties": {
+                        "drop": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        }
+                    }
+                },
+                "readOnlyRootFilesystem": {
+                    "type": "boolean"
+                },
+                "seccompProfile": {
+                    "type": "object",
+                    "properties": {
+                        "type": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
         "global": {
             "type": "object",
             "properties": {
@@ -15,16 +45,10 @@
                 }
             }
         },
-        "groupID": {
-            "type": "integer"
-        },
         "ingress": {
             "type": "object",
             "properties": {
                 "certSecretName": {
-                    "type": "string"
-                },
-                "className": {
                     "type": "string"
                 },
                 "enabled": {
@@ -33,11 +57,11 @@
                 "extraAnnotations": {
                     "type": "object"
                 },
-                "host": {
-                    "type": "string"
-                },
                 "hosts": {
                     "type": "array"
+                },
+                "ingressClassName": {
+                    "type": "string"
                 },
                 "letsencrypt": {
                     "type": "object",
@@ -60,57 +84,11 @@
         "oauth2Proxy": {
             "type": "object",
             "properties": {
-                "cookie": {
-                    "type": "object",
-                    "properties": {
-                        "expiry": {
-                            "type": "string"
-                        },
-                        "name": {
-                            "type": "string"
-                        },
-                        "refresh": {
-                            "type": "string"
-                        }
-                    }
-                },
-                "defaultProvider": {
-                    "type": "string"
-                },
-                "emailDomain": {
-                    "type": "string"
-                },
                 "extraArgs": {
                     "type": "array"
                 },
                 "extraEnv": {
                     "type": "array"
-                },
-                "oidc": {
-                    "type": "object",
-                    "properties": {
-                        "issuerURL": {
-                            "type": "string"
-                        },
-                        "loginURL": {
-                            "type": "string"
-                        },
-                        "profileURL": {
-                            "type": "string"
-                        },
-                        "redeemURL": {
-                            "type": "string"
-                        },
-                        "validateURL": {
-                            "type": "string"
-                        }
-                    }
-                },
-                "passAccessToken": {
-                    "type": "boolean"
-                },
-                "passAuthorizationHeader": {
-                    "type": "boolean"
                 },
                 "providers": {
                     "type": "array",
@@ -123,40 +101,92 @@
                             "clientSecret": {
                                 "type": "string"
                             },
-                            "cookieSecret": {
+                            "cookie": {
+                                "type": "object",
+                                "properties": {
+                                    "expiry": {
+                                        "type": "string"
+                                    },
+                                    "name": {
+                                        "type": "string"
+                                    },
+                                    "refresh": {
+                                        "type": "string"
+                                    },
+                                    "secret": {
+                                        "type": "string"
+                                    }
+                                }
+                            },
+                            "emailDomain": {
                                 "type": "string"
                             },
                             "extraArgs": {
                                 "type": "array"
                             },
+                            "extraEnv": {
+                                "type": "array"
+                            },
                             "id": {
                                 "type": "string"
                             },
+                            "oidc": {
+                                "type": "object",
+                                "properties": {
+                                    "issuerURL": {
+                                        "type": "string"
+                                    },
+                                    "loginURL": {
+                                        "type": "string"
+                                    },
+                                    "profileURL": {
+                                        "type": "string"
+                                    },
+                                    "redeemURL": {
+                                        "type": "string"
+                                    },
+                                    "validateURL": {
+                                        "type": "string"
+                                    }
+                                }
+                            },
+                            "passAccessToken": {
+                                "type": "boolean"
+                            },
+                            "passAuthorizationHeader": {
+                                "type": "boolean"
+                            },
                             "provider": {
                                 "type": "string"
+                            },
+                            "setAuthorizationHeader": {
+                                "type": "boolean"
+                            },
+                            "setXAuthRequest": {
+                                "type": "boolean"
+                            },
+                            "skipJwtBearerTokens": {
+                                "type": "boolean"
+                            },
+                            "skipProviderButton": {
+                                "type": "boolean"
                             }
                         }
                     }
-                },
-                "setAuthorizationHeader": {
-                    "type": "boolean"
-                },
-                "setXAuthRequest": {
-                    "type": "boolean"
-                },
-                "skipJwtBearerTokens": {
-                    "type": "boolean"
-                },
-                "skipProviderButton": {
-                    "type": "boolean"
                 }
             }
         },
         "podSecurityContext": {
             "type": "object",
             "properties": {
+                "runAsGroup": {
+                    "type": "integer"
+                },
                 "runAsNonRoot": {
                     "type": "boolean"
+                },
+                "runAsUser": {
+                    "type": "integer"
                 },
                 "seccompProfile": {
                     "type": "object",
@@ -187,36 +217,6 @@
                 }
             }
         },
-        "securityContext": {
-            "type": "object",
-            "properties": {
-                "allowPrivilegeEscalation": {
-                    "type": "boolean"
-                },
-                "capabilities": {
-                    "type": "object",
-                    "properties": {
-                        "drop": {
-                            "type": "array",
-                            "items": {
-                                "type": "string"
-                            }
-                        }
-                    }
-                },
-                "readOnlyRootFilesystem": {
-                    "type": "boolean"
-                },
-                "seccompProfile": {
-                    "type": "object",
-                    "properties": {
-                        "type": {
-                            "type": "string"
-                        }
-                    }
-                }
-            }
-        },
         "serviceMonitor": {
             "type": "object",
             "properties": {
@@ -230,9 +230,6 @@
                     "type": "string"
                 }
             }
-        },
-        "userID": {
-            "type": "integer"
         }
     }
 }

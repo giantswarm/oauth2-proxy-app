@@ -1,40 +1,27 @@
-{{- $singleProvider := (eq (len .Values.oauth2Proxy.providers) 1) -}}
 {{- range $provider := $.Values.oauth2Proxy.providers }}
 ---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-{{- if eq 1 (len $.Values.oauth2Proxy.providers) }}
-  name: {{ include "resource.default.name"  $ }}
-{{- else }}
-  name: {{ $provider.id }}-{{ include "resource.default.name"  $ }}
-{{- end }}
+  name: {{ include "resource.default.name" $ }}-{{ $provider.id }}
   namespace: {{ $.Release.Namespace }}
   labels:
     {{- include "labels.common" $ | nindent 4 }}
-    {{- if gt (len $.Values.oauth2Proxy.providers) 1}}
     oauth2-proxy.provider: {{ $provider.id }}
-    {{- end}}
 spec:
   replicas: 3
   selector:
     matchLabels:
       {{- include "labels.selector" $ | nindent 6 }}
-      {{- if gt (len $.Values.oauth2Proxy.providers) 1}}
       oauth2-proxy.provider: {{ $provider.id }}
-      {{- end}}
   template:
     metadata:
       labels:
         {{- include "labels.common" $ | nindent 8 }}
-        {{- if gt (len $.Values.oauth2Proxy.providers) 1}}
         oauth2-proxy.provider: {{ $provider.id }}
-        {{- end}}
     spec:
       serviceAccountName: {{ include "resource.default.name" $ }}
       securityContext:
-        runAsUser: {{ $.Values.userID }}
-        runAsGroup: {{ $.Values.groupID }}
         {{- with $.Values.podSecurityContext }}
           {{- . | toYaml | nindent 8 }}
         {{- end }}
@@ -42,41 +29,41 @@ spec:
       - image: {{ $.Values.registry.domain }}/giantswarm/oauth2-proxy:v{{ $.Chart.AppVersion }}
         name: {{ include "resource.default.name" $ }}
         args:
-        - --cookie-expire={{ $.Values.oauth2Proxy.cookie.expiry }}
-        - --cookie-name={{ $.Values.oauth2Proxy.cookie.name }}
-        - --cookie-refresh={{ $.Values.oauth2Proxy.cookie.refresh }}
-        {{- if $provider.cookieSecret }}
+        - --cookie-expire={{ $provider.cookie.expiry }}
+        - --cookie-name={{ $provider.cookie.name }}
+        - --cookie-refresh={{ $provider.cookie.refresh }}
+        {{- if $provider.cookie.secret }}
         - --cookie-secure=true
         {{- else }}
         - --cookie-secure=false
         {{- end }}
-        - --email-domain={{ $.Values.oauth2Proxy.emailDomain }}
+        - --email-domain={{ $provider.emailDomain }}
         - --http-address=0.0.0.0:4180
-        {{- if $.Values.oauth2Proxy.oidc.loginURL }}
-        - --login-url={{ $.Values.oauth2Proxy.oidc.loginURL }}
+        {{- if $provider.oidc.loginURL }}
+        - --login-url={{ $provider.oidc.loginURL }}
         {{- end }}
         {{- if $.Values.serviceMonitor.enabled }}
         - --metrics-address=0.0.0.0:44180
         {{- end }}
-        - --passAccessToken={{ $.Values.oauth2Proxy.passAccessToken }}
-        - --passAuthorizationHeader={{ $.Values.oauth2Proxy.passAuthorizationHeader }}
-        {{- if $.Values.oauth2Proxy.oidc.profileURL }}
-        - --profile-url={{ $.Values.oauth2Proxy.oidc.profileURL }}
+        {{- if $provider.oidc.issuerURL }}
+        - --oidc-issuer-url={{ $provider.oidc.issuerURL }}
         {{- end }}
-        - --provider={{ $provider.provider | default $.Values.oauth2Proxy.defaultProvider }}
-        {{- if $.Values.oauth2Proxy.oidc.issuerURL }}
-        - --oidc-issuer-url={{ $.Values.oauth2Proxy.oidc.issuerURL }}
+        - --pass-access-token={{ $provider.passAccessToken }}
+        - --pass-authorization-header={{ $provider.passAuthorizationHeader }}
+        {{- if $provider.oidc.profileURL }}
+        - --profile-url={{ $provider.oidc.profileURL }}
         {{- end }}
-        {{- if $.Values.oauth2Proxy.oidc.redeemURL }}
-        - --redeem-url={{ $.Values.oauth2Proxy.oidc.redeemURL }}
+        - --provider={{ $provider.provider }}
+        {{- if $provider.oidc.redeemURL }}
+        - --redeem-url={{ $provider.oidc.redeemURL }}
         {{- end }}
-        - --set-authorization-header={{ $.Values.oauth2Proxy.setAuthorizationHeader }}
-        - --set-xauthrequest={{ $.Values.oauth2Proxy.setXAuthRequest }}
-        - --skip-jwt-bearer-tokens={{ $.Values.oauth2Proxy.skipJwtBearerTokens }}
-        - --skip-provider-button={{ $.Values.oauth2Proxy.skipProviderButton }}
-         - --upstream=file:///dev/null
-        {{- if $.Values.oauth2Proxy.oidc.validateURL }}
-        - --validate-url={{ $.Values.oauth2Proxy.oidc.validateURL }}
+        - --set-authorization-header={{ $provider.setAuthorizationHeader }}
+        - --set-xauthrequest={{ $provider.setXAuthRequest }}
+        - --skip-jwt-bearer-tokens={{ $provider.skipJwtBearerTokens }}
+        - --skip-provider-button={{ $provider.skipProviderButton }}
+        - --upstream=file:///dev/null
+        {{- if $provider.oidc.validateURL }}
+        - --validate-url={{ $provider.oidc.validateURL }}
         {{- end }}
         {{- with $provider.extraArgs }}
         {{- toYaml . | nindent 8 }}
@@ -88,19 +75,22 @@ spec:
         - name: OAUTH2_PROXY_CLIENT_ID
           valueFrom:
             secretKeyRef:
-              name: {{ default (include "resource.default.name" $) $provider.existingSecret }}
-              key: {{ ternary "client-id" (printf "%s-client-id" .id) (or (not (empty $provider.existingSecret)) $singleProvider) }}
+              name: {{ (include "resource.default.name" $)-$provider.id }}
+              key: "client-id"
         - name: OAUTH2_PROXY_CLIENT_SECRET
           valueFrom:
             secretKeyRef:
-              name: {{ default (include "resource.default.name" $) $provider.existingSecret }}
-              key: {{ ternary "client-secret" (printf "%s-client-secret" .id) (or (not (empty $provider.existingSecret)) $singleProvider) }}
+              name: {{ (include "resource.default.name" $)-$provider.id  }}
+              key: "client-secret"
         - name: OAUTH2_PROXY_COOKIE_SECRET
           valueFrom:
             secretKeyRef:
-              name: {{ default (include "resource.default.name" $) $provider.existingSecret }}
-              key: {{ ternary "cookie-secret" (printf "%s-cookie-secret" .id) (or (not (empty $provider.existingSecret)) $singleProvider) }}
+              name: {{ (include "resource.default.name" $)-$provider.id  }}
+              key: "cookie-secret"
               optional: true
+        {{- with $provider.extraEnv }}
+        {{- toYaml . | nindent 8 }}
+        {{- end }}
         {{- with $.Values.oauth2Proxy.extraEnv }}
         {{- toYaml . | nindent 8 }}
         {{- end }}
@@ -135,7 +125,7 @@ spec:
             cpu: 100m
             memory: 100Mi
         securityContext:
-          {{- with $.Values.securityContext }}
+          {{- with $.Values.containerSecurityContext }}
             {{- . | toYaml | nindent 10 }}
           {{- end }}
 {{- end }}

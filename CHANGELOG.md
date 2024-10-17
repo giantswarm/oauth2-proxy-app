@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed
+
+- Refactor multi-provider support to be able to use different issuers.
+
 ## [2.14.0] - 2024-10-17
 
 ### Added
