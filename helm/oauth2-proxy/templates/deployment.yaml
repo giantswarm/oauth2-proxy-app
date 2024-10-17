@@ -58,8 +58,8 @@ spec:
         {{- if $.Values.serviceMonitor.enabled }}
         - --metrics-address=0.0.0.0:44180
         {{- end }}
-        - --passAccessToken={{ $.Values.oauth2Proxy.passAccessToken }}
-        - --passAuthorizationHeader={{ $.Values.oauth2Proxy.passAuthorizationHeader }}
+        - --pass-access-token={{ $.Values.oauth2Proxy.passAccessToken }}
+        - --pass-authorization-header={{ $.Values.oauth2Proxy.passAuthorizationHeader }}
         {{- if $.Values.oauth2Proxy.oidc.profileURL }}
         - --profile-url={{ $.Values.oauth2Proxy.oidc.profileURL }}
         {{- end }}
