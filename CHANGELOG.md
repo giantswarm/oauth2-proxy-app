@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Fixed
+
+- Fix indentation issue for upstream flag.
+
 ## [2.14.1] - 2024-10-17
 
 ### Fixed

@@ -74,7 +74,7 @@ spec:
         - --set-xauthrequest={{ $.Values.oauth2Proxy.setXAuthRequest }}
         - --skip-jwt-bearer-tokens={{ $.Values.oauth2Proxy.skipJwtBearerTokens }}
         - --skip-provider-button={{ $.Values.oauth2Proxy.skipProviderButton }}
-         - --upstream=file:///dev/null
+        - --upstream=file:///dev/null
         {{- if $.Values.oauth2Proxy.oidc.validateURL }}
         - --validate-url={{ $.Values.oauth2Proxy.oidc.validateURL }}
         {{- end }}
