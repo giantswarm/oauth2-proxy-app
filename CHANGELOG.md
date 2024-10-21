@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Fixed
+
+- Remove cert-manager ingress annotations as it is blocking ingress validation.
+
 ## [3.0.0] - 2024-10-17
 
 ### Changed
