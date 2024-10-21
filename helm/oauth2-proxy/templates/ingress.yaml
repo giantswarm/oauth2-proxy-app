@@ -5,7 +5,6 @@ metadata:
   annotations:
     {{- if .Values.ingress.letsencrypt.enabled }}
     kubernetes.io/tls-acme: {{ .Values.ingress.letsencrypt.enabled | quote }}
-    acme.cert-manager.io/http01-ingress-class: {{ .Values.ingress.ingressClassName | quote }}
     {{- end }}
     {{- range $key, $val := .Values.ingress.extraAnnotations }}
     {{ $key }}: {{ $val | quote }}
