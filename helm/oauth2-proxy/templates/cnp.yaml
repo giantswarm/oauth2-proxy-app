@@ -1,0 +1,22 @@
+apiVersion: "cilium.io/v2"
+kind: CiliumNetworkPolicy
+metadata:
+  name: {{ include "resource.default.name" . }}
+  namespace: {{ .Release.Namespace }}
+  labels:
+    {{- include "labels.common" . | nindent 4 }}
+spec:
+  endpointSelector:
+    matchLabels:
+      {{- include "labels.selector" . | nindent 6 }}
+  ingress:
+    - toPorts:
+        - ports:
+          - port: "{{ .Values.port.port }}"
+            protocol: TCP
+          {{- if .Values.serviceMonitor.enabled }}
+          - port: "44180"
+            protocol: TCP
+          {{- end }}
+  egress:
+    - {}
