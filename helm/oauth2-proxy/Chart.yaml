@@ -2,7 +2,7 @@ apiVersion: v2
 name: oauth2-proxy
 description: A reverse proxy that provides authentication with Google, Azure, OpenID Connect and many more identity providers
 home: https://github.com/giantswarm/oauth2-proxy-app
-version: "3.0.1"
+version: "3.0.2"
 appVersion: "7.7.0"
 annotations:
   application.giantswarm.io/team: atlas
