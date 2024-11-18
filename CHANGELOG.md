@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed
+
+- Upgrade oauth2-proxy to 7.7.1 to fix an issue related to ca validation.
+
 ## [3.0.2] - 2024-10-25
 
 ## [3.0.1] - 2024-10-21
