@@ -18,7 +18,6 @@ workflows:
             # Trigger the job also on git tag.
           tags:
             only: /^v.*/
-
           branches:
             ignore:
             - main
