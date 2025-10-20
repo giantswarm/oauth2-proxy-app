@@ -11,7 +11,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 
-- Fix ingress path to service by removing the provider.id when calling the service.
+- Fix ingress path to service by removing the provider.id when calling the backend service.
 
 ## [3.0.3] - 2024-11-18
 
