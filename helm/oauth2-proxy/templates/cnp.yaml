@@ -1,3 +1,4 @@
+{{- if and $.Values.oauth2Proxy.providers $.Values.networkPolicy.enabled (eq $.Values.networkPolicy.flavor "cilium") }}
 apiVersion: "cilium.io/v2"
 kind: CiliumNetworkPolicy
 metadata:
@@ -20,3 +21,4 @@ spec:
           {{- end }}
   egress:
     - {}
+{{- end }}
