@@ -32,6 +32,7 @@ ingress:
   extraAnnotations: {}
   # key: value
 
+# IMPORTANT: No resources will be deployed unless at least one provider is defined in oauth2Proxy.providers.
 oauth2Proxy:
   # extra arguments to pass to all oauth2-proxy independant on the provider.
   extraArgs:
