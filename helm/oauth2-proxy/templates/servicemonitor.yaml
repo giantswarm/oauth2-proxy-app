@@ -1,4 +1,5 @@
 {{- if .Values.serviceMonitor.enabled }}
+{{- if $.Values.oauth2Proxy.providers }}
 {{- range $provider := $.Values.oauth2Proxy.providers }}
 ---
 apiVersion: monitoring.coreos.com/v1
@@ -19,5 +20,6 @@ spec:
     matchLabels:
       {{- include "labels.selector" $ | nindent 6 }}
       oauth2-proxy.provider: {{ $provider.id }}
+{{- end }}
 {{- end }}
 {{- end }}

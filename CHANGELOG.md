@@ -7,6 +7,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed
+
+- Network policies can now be disabled or configured to use either "kubernetes" or "cilium" flavors via `networkPolicy.enabled` and `networkPolicy.flavor` settings.
+
+### Fixed
+
+- Prevent creation of empty or invalid Kubernetes resources when no OAuth2 providers are configured.
+
 ## [3.1.0] - 2025-10-20
 
 ### Fixed

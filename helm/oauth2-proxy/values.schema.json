@@ -32,19 +32,6 @@
                 }
             }
         },
-        "global": {
-            "type": "object",
-            "properties": {
-                "podSecurityStandards": {
-                    "type": "object",
-                    "properties": {
-                        "enforced": {
-                            "type": "boolean"
-                        }
-                    }
-                }
-            }
-        },
         "ingress": {
             "type": "object",
             "properties": {
@@ -81,6 +68,17 @@
                 }
             }
         },
+        "networkPolicy": {
+            "type": "object",
+            "properties": {
+                "enabled": {
+                    "type": "boolean"
+                },
+                "flavor": {
+                    "type": "string"
+                }
+            }
+        },
         "oauth2Proxy": {
             "type": "object",
             "properties": {
@@ -94,33 +92,7 @@
                     "type": "array"
                 },
                 "providers": {
-                    "type": "array",
-                    "items": {
-                        "type": "object",
-                        "properties": {
-                            "clientID": {
-                                "type": "string"
-                            },
-                            "clientSecret": {
-                                "type": "string"
-                            },
-                            "cookieSecret": {
-                                "type": "string"
-                            },
-                            "extraArgs": {
-                                "type": "array"
-                            },
-                            "extraEnv": {
-                                "type": "array"
-                            },
-                            "id": {
-                                "type": "string"
-                            },
-                            "provider": {
-                                "type": "string"
-                            }
-                        }
-                    }
+                    "type": "array"
                 }
             }
         },

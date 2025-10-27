@@ -17,11 +17,7 @@ It is build upon the [oauth2-proxy/oauth2-proxy](https://github.com/oauth2-proxy
 
 More options can be found in the [command line options documentation](https://oauth2-proxy.github.io/oauth2-proxy/docs/configuration/overview/#command-line-options).
 
-## Current supported Services at Giant Swarm
-
-- Prometheus operator managed Prometheus and Alertmanager
-- G8s-Alertmanager
-- G8s-Alertmanager-Dashboard
+> **Note:** This chart will not deploy any resources unless at least one provider is defined in `oauth2Proxy.providers` in your values file. By default, the providers list is empty and no resources will be created until you add a provider configuration.
 
 ## Add authentication/authorization to a web frontend
 

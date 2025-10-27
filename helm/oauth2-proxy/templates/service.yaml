@@ -1,3 +1,4 @@
+{{- if $.Values.oauth2Proxy.providers }}
 {{- range $provider := $.Values.oauth2Proxy.providers }}
 ---
 apiVersion: v1
@@ -23,4 +24,5 @@ spec:
   selector:
     {{- include "labels.selector" $ | nindent 4 }}
     oauth2-proxy.provider: {{ $provider.id }}
+{{- end }}
 {{- end }}
