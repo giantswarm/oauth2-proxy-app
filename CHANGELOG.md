@@ -10,6 +10,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 
 - Push the oauth2-proxy app to the `giantswarm` app catalog.
+- Correct the CircleCI `giantswarm` app catalog config.
 
 ## [3.2.0] - 2025-10-27
 
