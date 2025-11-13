@@ -10,9 +10,9 @@ workflows:
     - architect/push-to-app-catalog:
         context: architect
         executor: app-build-suite
-        name: push-to-default-app-catalog
-        app_catalog: default-catalog
-        app_catalog_test: default-test-catalog
+        name: push-to-giantswarm-app-catalog
+        app_catalog: giantswarm-catalog
+        app_catalog_test: giantswarm-test-catalog
         chart: oauth2-proxy
         filters:
             # Trigger the job also on git tag.
