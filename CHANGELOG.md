@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- Add HTTPRoute resource to support migration to Gateway API.
+
 ## [3.3.0] - 2025-11-13
 
 ### Added

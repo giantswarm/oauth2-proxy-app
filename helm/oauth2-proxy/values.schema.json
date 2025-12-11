@@ -32,6 +32,17 @@
                 }
             }
         },
+        "gateway": {
+            "type": "object",
+            "properties": {
+                "enabled": {
+                    "type": "boolean"
+                },
+                "hosts": {
+                    "type": "array"
+                }
+            }
+        },
         "ingress": {
             "type": "object",
             "properties": {

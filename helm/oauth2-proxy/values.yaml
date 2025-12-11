@@ -8,6 +8,10 @@ port:
 registry:
   domain: gsoci.azurecr.io
 
+gateway:
+  enabled: false
+  hosts: []
+
 ingress:
   # Set to true to create an ingress resource for the oauth2-proxy service.
   enabled: false
