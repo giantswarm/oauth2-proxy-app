@@ -33,7 +33,7 @@ spec:
           port: {{ $.Values.port.port }}
       matches:
       - path:
-          type: PathPrefix
+          type: RegularExpression
           value: /oauth2/{{ $provider.id }}(/|$)(.*)
     {{- end }}
 {{- end }}
