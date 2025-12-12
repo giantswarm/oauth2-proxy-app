@@ -32,6 +32,40 @@
                 }
             }
         },
+        "route": {
+            "type": "object",
+            "properties": {
+                "enabled": {
+                    "type": "boolean"
+                },
+                "kind": {
+                    "type": "string"
+                },
+                "annotations": {
+                    "type": "object"
+                },
+                "labels": {
+                    "type": "object"
+                },
+                "hostnames": {
+                    "type": "array"
+                },
+                "parentRefs": {
+                    "type": "array"
+                },
+                "additionalRules": {
+                    "type": "array"
+                },
+                "securityPolicy": {
+                    "type": "object",
+                    "properties": {
+                        "enabled": {
+                            "type": "boolean"
+                        }
+                    }
+                }
+            }
+        },
         "ingress": {
             "type": "object",
             "properties": {
