@@ -1,27 +1,39 @@
-{{- if and .Values.gateway.enabled $.Values.oauth2Proxy.providers }}
+{{- if .Values.route.enabled -}}
+{{- $route := .Values.route }}
 apiVersion: gateway.networking.k8s.io/v1
-kind: HTTPRoute
+kind: {{ $route.kind | default "HTTPRoute" }}
 metadata:
-  name: {{ include "resource.default.name" . }}
+  name: {{ $route.name }}
   namespace: {{ $.Release.Namespace }}
   labels:
-    {{- include "labels.common" . | nindent 4 }}
+    {{- include "labels.common" $ | nindent 4 }}
+    {{- with $route.labels }}
+    {{- toYaml . | nindent 4 }}
+    {{- end }}
+  {{- with $route.annotations }}
+  annotations:
+    {{- toYaml . | nindent 4 }}
+  {{- end }}
 spec:
+  {{- with $route.hostnames }}
   hostnames:
-  {{- range .Values.gateway.hosts }}
-  - {{ . }}
+    {{- tpl (toYaml .) $ | nindent 4 }}
   {{- end }}
+  {{- with $route.parentRefs }}
   parentRefs:
-  - name: giantswarm-default
-    namespace: envoy-gateway-system
-  rules:
-  {{- range $provider := $.Values.oauth2Proxy.providers }}
-  - backendRefs:
-    - name: {{ include "resource.default.name" $ }}-{{ $provider.id }}
-      port: {{ $.Values.port.port }}
-    matches:
-    - path:
-        type: PathPrefix
-        value: /oauth2/{{ $provider.id }}(/|$)(.*)
+    {{- toYaml . | nindent 4 }}
   {{- end }}
+  rules:
+    {{- if $route.additionalRules }}
+    {{- tpl (toYaml $route.additionalRules) $ | nindent 4 }}
+    {{- end }}
+    {{- range $provider := $.Values.oauth2Proxy.providers }}
+    - backendRefs:
+        - name: {{ include "resource.default.name" $ }}-{{ $provider.id }}
+          port: {{ $.Values.port.port }}
+      matches:
+      - path:
+          type: PathPrefix
+          value: /oauth2/{{ $provider.id }}(/|$)(.*)
+    {{- end }}
 {{- end }}

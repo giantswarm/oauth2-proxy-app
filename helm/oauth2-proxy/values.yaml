@@ -8,9 +8,19 @@ port:
 registry:
   domain: gsoci.azurecr.io
 
-gateway:
+route:
   enabled: false
-  hosts: []
+  kind: HTTPRoute
+  annotations: {}
+  labels: {}
+  hostnames: []
+  parentRefs: []
+  # - name: giantswarm-default
+  #   namespace: envoy-gateway-system
+  ## Additional custom rules that can be added to the route
+  additionalRules: []
+  securityPolicy:
+    enabled: false
 
 ingress:
   # Set to true to create an ingress resource for the oauth2-proxy service.
